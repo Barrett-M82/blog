@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on ExampleSite</title>
+    <link>http://localhost:1313/blog/tags/python/</link>
+    <description>Recent content in python on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="http://localhost:1313/blog/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux下 安装tesseract和 python使用tesseract-ocr进行图片识别</title>
+      <link>http://localhost:1313/blog/post/ai/%E5%9B%BE%E7%89%87%E8%BD%AC%E6%96%87%E5%AD%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/ai/%E5%9B%BE%E7%89%87%E8%BD%AC%E6%96%87%E5%AD%97/</guid>
+      <description>centos7安装依赖库
+yum install -y automake autoconf libtool gcc gcc-c++ yum install -y libpng-devel libjpeg-devel libtiff-devel yum -y install python-devel yum -y install openssl-devel yum -y install opencv yum install -y libffi libffi-devel yum install libmount -y 如果需要tesseract，则需要安装leptonica
+http://www.leptonica.org/download.html https://github.com/DanBloomberg/leptonica  wget https://github.com/DanBloomberg/leptonica/archive/1.79.0.zip unzip 1.79.0.zip cd 1.79.0/ ./autogen.sh ./configure make &amp;amp;&amp;amp; make install 安装tesseract4 .0
+https://github.com/tesseract-ocr/tesseract  wget https://github.com/tesseract-ocr/tesseract/archive/5.0.0-alpha.zip 或者下面这个 wget http://linux-1251121573.cosgz.myqcloud.com/soft/tesseract/4.0.0-beta.1.tar.gz  unzip master.zip cd tesseract-master/ ./autogen.sh ./configure make &amp;amp;&amp;amp; make install ldconfig .</description>
+    </item>
+    
+  </channel>
+</rss>

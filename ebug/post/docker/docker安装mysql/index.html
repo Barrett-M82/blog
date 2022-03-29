@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html><body>#导航栏
+<nav class="nav">
+<ul>
+    
+    
+    <li><a href="/blog/">首页</a></li>
+     
+    
+    <li><a href="/blog/post">博文</a></li>
+     
+</ul>
+</nav><div id="content">
+
+<div id="post" class="post">
+    <article>
+        <header>
+            <h1 class="post-title">Docker安装Mysql</h1>
+        </header>
+        <p>一、下载
+下载镜像</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull mysql:8.0.16
+</span></span></code></pre></div><p>将全部的配置文件和关联的文件夹统一放到/opt/docker-mysql中</p>
+<p>二、配置文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p /opt/docker-mysql/conf.d
+</span></span></code></pre></div><p>增加并修改配置文件config-file.cnf</p>
+<p>内容如下,设置表名不区分大小写; linux下默认是区分的，windows下默认不区分</p>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">sudo tee /opt/docker-mysql/conf.d/config-file.cnf &lt;&lt;-&#39;EOF&#39;
+[mysqld]
+# 表名不区分大小写
+lower_case_table_names=1 
+#server-id=1
+datadir=/var/lib/mysql
+#socket=/var/lib/mysql/mysqlx.sock
+#symbolic-links=0
+# sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES 
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+EOF
+</code></pre><p>三、启动
+增加数据文件夹</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p /opt/docker-mysql/var/lib/mysql
+</span></span></code></pre></div><p>启动，设置默认密码 123456-abc</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run --name mysql <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --restart<span style="color:#f92672">=</span>always <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -p 3306:3306 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /opt/docker-mysql/conf.d:/etc/mysql/conf.d <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /opt/docker-mysql/var/lib/mysql:/var/lib/mysql <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -e MYSQL_ROOT_PASSWORD<span style="color:#f92672">=</span>123456-abc <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -d mysql:8.0.16
+</span></span></code></pre></div><p>四、 常用命令
+进入容器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker exec -it mysql bash
+</span></span></code></pre></div><p>查看日志</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker logs -f mysql
+</span></span></code></pre></div><p>备份数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker exec mysql sh -c <span style="color:#e6db74">&#39;exec mysqldump --all-databases -uroot -p&#34;123456-abc&#34;&#39;</span> &gt; /some/path/on/your/host/all-databases.sql
+</span></span></code></pre></div><p>恢复数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker exec -i mysql sh -c <span style="color:#e6db74">&#39;exec mysql -uroot -p&#34;123456-abc&#34;&#39;</span> &lt; /some/path/on/your/host/all-databases.sql
+</span></span></code></pre></div><p>五、 其他问题
+only_full_group_by 问题
+如果安装的版本是 5.7版本, 查询数据时出现如下错误</p>
+<p>this is incompatible with sql_mode=only_full_group_by</p>
+<p>可以使用使用下列方式解决</p>
+<ol>
+<li>查询 sql_mode
+select @@sql_mode
+结果如下</li>
+</ol>
+<p>ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</p>
+<ol start="2">
+<li>重置
+删除其中的 ONLY_FULL_GROUP_BY配置，重新设置到 config-file.cnf中</li>
+</ol>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">
+[mysqld]
+# 表名不区分大小写
+lower_case_table_names=1 
+#server-id=1
+datadir=/var/lib/mysql
+#socket=/var/lib/mysql/mysqlx.sock
+#symbolic-links=0
+sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+</code></pre><ol start="3">
+<li>重启容器</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker restart mysql
+</span></span></code></pre></div><p>作者：QuincyZ
+链接：https://www.jianshu.com/p/d6febf6f95e0
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+        <br />
+
+        <div>
+            
+            <a href="http://localhost:1313/blog/post/developtools/%E5%90%84%E5%BC%8F%E5%90%84%E6%A0%B7%E7%9A%84%E5%B0%8F%E5%BE%BD%E7%AB%A0/">前一页</a>
+            
+            
+            <a href="http://localhost:1313/blog/post/developtools/mybase7%E8%AF%95%E7%94%A8%E5%88%B0%E6%9C%9F-%E7%A0%B4%E8%A7%A3%E6%AD%A5%E9%AA%A4/">后一页</a>
+            
+        </div>
+    </article>
+</div>
+
+
+        </div><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script></body>
+</html>

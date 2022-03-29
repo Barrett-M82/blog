@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CentOS on ExampleSite</title>
+    <link>http://localhost:1313/blog/categories/centos/</link>
+    <description>Recent content in CentOS on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 26 Mar 2022 23:15:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/blog/categories/centos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS 安装ali yum 源</title>
+      <link>http://localhost:1313/blog/post/linux/centos%E4%BF%AE%E6%94%B9ali-yum%E6%BA%90/</link>
+      <pubDate>Sat, 26 Mar 2022 23:15:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/linux/centos%E4%BF%AE%E6%94%B9ali-yum%E6%BA%90/</guid>
+      <description>centos8 修改yum源为阿里源,某下网络下速度比较快 首先是到yum源设置文件夹里
+ #安装base reop源 cd /etc/yum.repos.d #接着备份旧的配置文件  sudo mv CentOS-Base.repo CentOS-Base.repo.bak #下载阿里源的文件  sudo wget -O CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo #安装epel repo源 #epel(RHEL 7)  sudo wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo #清理缓存 yum clean all #重新生成缓存 yum makecache </description>
+    </item>
+    
+  </channel>
+</rss>

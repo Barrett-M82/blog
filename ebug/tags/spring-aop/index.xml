@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>spring aop on ExampleSite</title>
+    <link>http://localhost:1313/blog/tags/spring-aop/</link>
+    <description>Recent content in spring aop on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="http://localhost:1313/blog/tags/spring-aop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SpringBoot AOP</title>
+      <link>http://localhost:1313/blog/post/springboot/springboot-aop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/springboot/springboot-aop/</guid>
+      <description>AOP：面向切面编程，相对于OOP面向对象编程 Spring的AOP的存在目的是为了解耦。AOP可以让一组类共享相同的行为。在OOP中只能继承和实现接口，且类继承只能单继承，阻碍更多行为添加到一组类上，AOP弥补了OOP的不足。
+还有就是为了清晰的逻辑，让业务逻辑关注业务本身，不用去关心其它的事情，比如事务。
+Spring的AOP是通过JDK的动态代理和CGLIB实现的。
+注意：在完成了引入AOP依赖包后，不需要去做其他配置。AOP的默认配置属性中，spring.aop.auto属性默认是开启的，也就是说只要引入了AOP依赖后，默认已经增加了@EnableAspectJAutoProxy，不需要在程序主类中增加@EnableAspectJAutoProxy来启用。 pom.xml
+ &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;2.2.2.RELEASE&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-aop&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;2.2.0.RELEASE&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;1.2.58&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt; controller
+package com.example.springaopdemo.controller;  import org.springframework.web.bind.annotation.PathVariable; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RestController;  @RestController public class AopController {   @RequestMapping(&amp;#34;/getInfo/{name}&amp;#34;)  public String getInfo(@PathVariable(&amp;#34;name&amp;#34;) String name){  return &amp;#34;name: &amp;#34; + name;  }   @RequestMapping(&amp;#34;/exception&amp;#34;)  public void exception(){  throw new RuntimeException(&amp;#34;this is a text exception&amp;#34;);  }  } aspect</description>
+    </item>
+    
+  </channel>
+</rss>

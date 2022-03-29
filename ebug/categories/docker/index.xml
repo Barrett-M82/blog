@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on ExampleSite</title>
+    <link>http://localhost:1313/blog/categories/docker/</link>
+    <description>Recent content in docker on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 30 May 2018 15:20:36 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS 安装ali yum 源</title>
+      <link>http://localhost:1313/blog/post/docker/docker%E5%8A%A0%E9%80%9Fali%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</link>
+      <pubDate>Wed, 30 May 2018 15:20:36 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/docker/docker%E5%8A%A0%E9%80%9Fali%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</guid>
+      <description>配置镜像加速器 针对Docker客户端版本大于 1.10.0 的用户
+您可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器
+sudo mkdir -p /etc/docker sudo tee /etc/docker/daemon.json &amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39; { &amp;#34;registry-mirrors&amp;#34;: [&amp;#34;https://pt4rrit7.mirror.aliyuncs.com&amp;#34;] } EOF sudo systemctl daemon-reload sudo systemctl restart docker </description>
+    </item>
+    
+  </channel>
+</rss>

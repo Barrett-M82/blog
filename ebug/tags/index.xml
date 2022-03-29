@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on ExampleSite</title>
+    <link>http://localhost:1313/blog/tags/</link>
+    <description>Recent content in Tags on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 27 Mar 2022 14:42:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>default</title>
+      <link>http://localhost:1313/blog/tags/default/</link>
+      <pubDate>Sun, 27 Mar 2022 14:42:54 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/default/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CentOS</title>
+      <link>http://localhost:1313/blog/tags/centos/</link>
+      <pubDate>Sat, 26 Mar 2022 23:15:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/centos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>diary</title>
+      <link>http://localhost:1313/blog/tags/diary/</link>
+      <pubDate>Sat, 26 Mar 2022 23:15:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/diary/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>http://localhost:1313/blog/tags/mysql/</link>
+      <pubDate>Sat, 26 Mar 2022 23:15:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>http://localhost:1313/blog/tags/docker/</link>
+      <pubDate>Wed, 30 May 2018 15:20:36 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AI</title>
+      <link>http://localhost:1313/blog/tags/ai/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hexo</title>
+      <link>http://localhost:1313/blog/tags/hexo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/hexo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>io</title>
+      <link>http://localhost:1313/blog/tags/io/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/io/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java</title>
+      <link>http://localhost:1313/blog/tags/java/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>http://localhost:1313/blog/tags/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>spring aop</title>
+      <link>http://localhost:1313/blog/tags/spring-aop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/spring-aop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>springboot</title>
+      <link>http://localhost:1313/blog/tags/springboot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/springboot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>http://localhost:1313/blog/tags/windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>小徽章</title>
+      <link>http://localhost:1313/blog/tags/%E5%B0%8F%E5%BE%BD%E7%AB%A0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/tags/%E5%B0%8F%E5%BE%BD%E7%AB%A0/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

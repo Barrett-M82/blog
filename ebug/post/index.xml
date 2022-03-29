@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Post on ExampleSite</title>
+    <link>http://localhost:1313/blog/post/</link>
+    <description>Recent content in Post on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 26 Mar 2022 10:41:38 +0800</lastBuildDate><atom:link href="http://localhost:1313/blog/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Page4</title>
+      <link>http://localhost:1313/blog/post/page4/</link>
+      <pubDate>Sun, 27 Mar 2022 14:42:54 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/page4/</guid>
+      <description>page4</description>
+    </item>
+    
+    <item>
+      <title>Page3</title>
+      <link>http://localhost:1313/blog/post/page3/</link>
+      <pubDate>Sun, 27 Mar 2022 14:42:50 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/page3/</guid>
+      <description>page3</description>
+    </item>
+    
+    <item>
+      <title>Page2</title>
+      <link>http://localhost:1313/blog/post/page2/</link>
+      <pubDate>Sun, 27 Mar 2022 14:42:46 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/page2/</guid>
+      <description>page2</description>
+    </item>
+    
+    <item>
+      <title>Page1</title>
+      <link>http://localhost:1313/blog/post/page1/</link>
+      <pubDate>Sun, 27 Mar 2022 14:42:43 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/page1/</guid>
+      <description>page1</description>
+    </item>
+    
+    <item>
+      <title>2022 03 26</title>
+      <link>http://localhost:1313/blog/post/diary/2022-03-26/</link>
+      <pubDate>Sat, 26 Mar 2022 23:15:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/diary/2022-03-26/</guid>
+      <description>今天和同事去爬梧桐山，他带了一些吃的和2瓶啤酒，玻璃瓶的那种，咬了半天咬不开，这牙口真不行，到了山顶上在台阶上起开的。
+中午出门的时候，没吃中午饭的，原因是早上吃了4个鸡蛋有点恶心，还好同事带了足够的吃食，不然爬到山上要饿死个球了。
+下午回来的时候，吃完饭觉得身体很舒服，心情也很放松。
+想到了自己的情绪原来也很容易调整的，只要适量的运动一下，再吃点好吃的，整个人就会轻松起来。
+看来要总结一下调整情绪的方法，这样以后，每天都可以很开心了。
+影响情绪的因素有很多，心理上的和身体上的。以后慢慢总结吧。</description>
+    </item>
+    
+    <item>
+      <title>2022 03 26</title>
+      <link>http://localhost:1313/blog/post/mysql/mysql-%E4%B9%90%E8%A7%82%E9%94%81%E6%82%B2%E8%A7%82%E9%94%81/</link>
+      <pubDate>Sat, 26 Mar 2022 23:15:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/mysql/mysql-%E4%B9%90%E8%A7%82%E9%94%81%E6%82%B2%E8%A7%82%E9%94%81/</guid>
+      <description>mysql 乐观锁,悲观锁 MySQL InnoDB中使用悲观锁
+要使用悲观锁，必须关闭mysql数据库的自动提交属性，因为MySQL默认使用autocommit模式，也就是当你执行一个更新操作后，MySQL会立即将结果进行提交
+//开始事务  begin;/begin work;/start transaction;（三者选一个）  select status from t_goods where id=1 for update;  //根据商品信息生成订单  insert into t_orders (id,goods_id) values (null,1);  //修改商品status为2  update t_goods set status=2;  // 提交事务  commit;/commit work; 以上查询语句中，使用了select&amp;hellip;for update方式，通过开启排他锁的方式实现了悲观锁。则相应的记录被锁定，其他事务必须等本次事务提交之后才能够执行
+我们使用select &amp;hellip; for update会把数据给锁定，不过我们需要注意一些锁的级别，MySQL InnoDB默认行级锁。行级锁都是基于索引的，如果一条SQL用不到索引是不会使用行级锁的，会使用表级锁把整张表锁住。
+特点
+为数据处理的安全提供了保证
+效率上，由于处理加锁的机制会让数据库产生额外开销，增加产生死锁机会
+在只读型事务中由于不会产生冲突，也没必要使用锁，这样会增加系统负载，降低并行性
+**乐观锁 **
+乐观并发控制也是一种并发控制的方法。
+假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据，在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没其他事务修改该数据，如果有则回滚正在提交的事务
+乐观锁相对悲观锁而言，是假设数据不会发生冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误信息，让用户决定如何做
+乐观锁实现一般使用记录版本号，为数据增加一个版本标识，当更新数据的时候对版本标识进行更新
+实现
+使用版本号时，可以在数据初始化时指定一个版本号，每次对数据的更新操作都对版本号执行+1操作。并判断当前版本号是不是该数据的最新版本号
+1.查询出商品信息  select (status,status,version) from t_goods where id=#{id}  2.根据商品信息生成订单  3.</description>
+    </item>
+    
+    <item>
+      <title>CentOS 安装ali yum 源</title>
+      <link>http://localhost:1313/blog/post/linux/centos%E4%BF%AE%E6%94%B9ali-yum%E6%BA%90/</link>
+      <pubDate>Sat, 26 Mar 2022 23:15:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/linux/centos%E4%BF%AE%E6%94%B9ali-yum%E6%BA%90/</guid>
+      <description>centos8 修改yum源为阿里源,某下网络下速度比较快 首先是到yum源设置文件夹里
+ #安装base reop源 cd /etc/yum.repos.d #接着备份旧的配置文件  sudo mv CentOS-Base.repo CentOS-Base.repo.bak #下载阿里源的文件  sudo wget -O CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo #安装epel repo源 #epel(RHEL 7)  sudo wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo #清理缓存 yum clean all #重新生成缓存 yum makecache </description>
+    </item>
+    
+    <item>
+      <title>CentOS 安装ali yum 源</title>
+      <link>http://localhost:1313/blog/post/docker/docker%E5%8A%A0%E9%80%9Fali%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</link>
+      <pubDate>Wed, 30 May 2018 15:20:36 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/docker/docker%E5%8A%A0%E9%80%9Fali%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</guid>
+      <description>配置镜像加速器 针对Docker客户端版本大于 1.10.0 的用户
+您可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器
+sudo mkdir -p /etc/docker sudo tee /etc/docker/daemon.json &amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39; { &amp;#34;registry-mirrors&amp;#34;: [&amp;#34;https://pt4rrit7.mirror.aliyuncs.com&amp;#34;] } EOF sudo systemctl daemon-reload sudo systemctl restart docker </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/blog/post/computer/idescsisatausb%E5%B9%B6%E5%8F%A3%E5%92%8C%E4%B8%B2%E5%8F%A3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/idescsisatausb%E5%B9%B6%E5%8F%A3%E5%92%8C%E4%B8%B2%E5%8F%A3/</guid>
+      <description>#IDE、SCSI、SATA、USB、并口和串口
+##IDE IDE的英文全称为“Integrated Drive Electronics”，即“电子集成驱动器”，它的本意是指把“硬盘控制器”与“盘体”集成在一起的硬盘驱动器。把盘体与控制器集成在一起的做法减少了硬盘接口的电缆数目与长度，数据传输的可靠性得到了增强，硬盘制造起来变得更容易，因为硬盘生产厂商不需要再担心自己的硬盘是否与其它厂商生产的控制器兼容。对用户而言，硬盘安装起来也更为方便。IDE这一接口技术从诞生至今就一直在不断发展，性能也不断的提高，其拥有的价格低廉、兼容性强的特点，为其造就了其它类型硬盘无法替代的地位。 IDE代表着硬盘的一种类型，但在实际的应用中，人们也习惯用IDE来称呼最早出现IDE类型硬盘ATA-1，这种类型的接口随着接口技术的发展已经被淘汰了，而其后发展分支出更多类型的硬盘接口，比如ATA、Ultra ATA、DMA、Ultra DMA等接口都属于IDE硬盘。
+##SATA SATA的全称是Serial Advanced Technology Attachment，是由Intel、IBM、Dell、APT、Maxtor和Seagate公司共同提出的硬盘接口规范，在IDF Fall 2001大会上，Seagate宣布了Serial ATA 1.0标准，正式宣告了SATA规范的确立。SATA规范将硬盘的外部传输速率理论值提高到了150MB/s，比PATA标准ATA/100高出50%，比ATA/133也要高出约13%，而随着未来后续版本的发展，SATA接口的速率还可扩展到2X和4X(300MB/s和600MB/s)。从其发展计划来看，未来的SATA也将通过提升时钟频率来提高接口传输速率，让硬盘也能够超频。 SATA接口需要硬件芯片的支持，例如Intel ICH5(R)、VIA VT8237、nVIDIA的MCP RAID和SiS964，如果主板南桥芯片不能直接支持的话，就需要选择第三方的芯片，例如Silicon Image 3112A芯片等，不过这样也就会产生一些硬件性能的差异，并且驱动程序也比较繁杂。 SATA的优势：支持热插拔 ，传输速度快，执行效率高.
+##SCSI　至于SCSI(Small Computer System Interface，小型计算机系统接口)，其速度、性能和稳定性都比IDE要好，价格当然也要贵得多，主要面向服务器和工作站市场。 在过去的几年间，IDE进步得很快，Ultra DMA 33推出不到两年，Ultra DMA 66就上市了。其实，SCSI的发展一点也不比IDE慢，只不过我们较少接触，对其了解不深而己。SCSI的标准从1980年开始实行，但到现在还未统一，各厂商对它的命名不相同，容易令人混淆是最主要的原因，下文介绍了SCSI接口的各个方面，希望对准备购买SCSI设备的朋友有所帮助。 一、概述 SCSI是一种连结主机和外围设备的接口，支持包括磁盘驱动器、磁带机、光驱、扫描仪在内的多种设备。它由SCSI控制器进行数据操作，SCSI控制器相当于一块小型CPU，有自己的命令集和缓存。要了解SCSI，必须先了解它的类型，以下是STA(SCSI Trade Association，SCSI同业公会)的标准分类。 SCSI的类型，注释： (1)点到点传输的总线长度 (2)SCSI、Ultra SCSI或Ultra2 SCSI均是可选项 (3)LVD(Low Voltage Differential，低分差动)没有定义它的速度，在12米以内都能保持正常传输率。如果在总线内有一个设备设置成单终结，整个总线也会切换成单终结。 (4)单终结没有定义它的长度 (5)HVD(High Voltage Differential，高分差动)没有定义它的速度 (6)在Ultra2之后，所有高速传输都是基于宽带(Wide)模式。 看到上述标准，是否觉得有点眼花缭乱，其实，对于一个新用户来说，了解SCSI控制器和数据线的类型比接口类型更重要。在SCSI总线中，控制器也算一个设备， 即实际最大可连接设备数目 = 理论最大支持设备数目-1。 二：SCSI连接器的类型 SCSI连接器分为内置和外置两种。 内置数据线的外型和IDE数据线一样，只是针数和规格稍有差别，主要用于连接光驱和硬盘， 40针IDE线有40根导线，40针ATA66有80根导线，SCSI内置则分为50针、68针和80针。 至于SCSI外置数据线，就有以下几种规格，它们的密度均不相同，千万别弄错了。 Apple SCSI，共有25针，分为两排，8位，常用于Mac机和旧式Sun工作站。 Sun Microsystem的DD-50SA，共有50针，分为三排。 SCSI-2 ，共有50针，分为两排，8位。 Centronics，共有50针，分为两排，8位，有点像并行口，它可以连接的设备数目最多。 SCA，共有80针，分为两排。 SCSI-3和Wide SCSI-2，共有68针，分为两排，16位。旧式DEC单终结SCSI使用68针高密接口。 三、SCSI ID和总线终结器 相信许多SCSI用户都有这种经历，插上设备之后，操作系统怎样也不认，后来检查总线，才发现是终结和ID没有设置好。ID(identify)作为SCSI设备在SCSI总线的唯一识别符，绝对不允许重复，可选范围从0到15，SCSI主控制器通常占用id 7，即是说我们可以用在设备上的ID号共有15个。总线终结器能告诉SCSI主控制器整条总线在何处终结，并发出一个反射信号给控制器，必须在两个物理终端作一个终结信号才能使用SCSI总线。常见的错误是把终结设置在ID号最高或最低的地方，而不是设置在物理终端的SCSI设备上。其实，SCSI设备总是以链形来连接的，按顺序就能分辨出哪一个是终结设备。 终结的方式有三种：自终结设备、物理总线终结器和自终结电缆。大多数新型SCSI设备都有自终结跳线，只要把非终结设备的自终结跳线设置成OFF即可避免冲突问题;物理总线终结器是一种硬件接头，又分为主动型和被动型两种，主动型使用电压调整器来进行操作，被动型利用总线上的能源信号来操作，被动型比主动型更为精确;自终结电缆可以代替物理总线终结器，也是一种硬件，它的价格非常昂贵，常用于两个主机连接同一个物理设备，如：两个服务器存取同一个物理SCSI硬盘。 通过检查SCSI ID和总线终结器，我们可以找出大多数冲突现象的解决方法，这是SCSI设备用户必须重视的一点。 四、IDE V.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/blog/post/developtools/mybase7%E8%AF%95%E7%94%A8%E5%88%B0%E6%9C%9F-%E7%A0%B4%E8%A7%A3%E6%AD%A5%E9%AA%A4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/developtools/mybase7%E8%AF%95%E7%94%A8%E5%88%B0%E6%9C%9F-%E7%A0%B4%E8%A7%A3%E6%AD%A5%E9%AA%A4/</guid>
+      <description>myBase7试用到期 破解步骤 原创solid_j 发布于2018-06-06 09:00:46 阅读数 23789 收藏 展开 myBase7是一个很好的记录笔记的工具，但它是收费的，但是，任何一个收费的东西，咱们都能给他找到破解的方法！废话不多说，请看下方步骤：
+first of all:
+ 请保持你的myBase7是关闭的
+1、找到myBase7的安装目录(myBase.exe的目录)；
+2、右键编辑打开myBase.ini；
+3、找到 App.UserLic.FirstUseOn，并在确保myBase关闭的情况下将其删除； 4、重启myBase，这样就可以正常使用了。
+很简单的几步就完成了破解！ ———————————————— 版权声明：本文为CSDN博主「solid_j」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。 原文链接：https://blog.csdn.net/solid_j/article/details/80589789</description>
+    </item>
+    
+    <item>
+      <title>Docker安装Mysql</title>
+      <link>http://localhost:1313/blog/post/docker/docker%E5%AE%89%E8%A3%85mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/docker/docker%E5%AE%89%E8%A3%85mysql/</guid>
+      <description>一、下载 下载镜像
+docker pull mysql:8.0.16 将全部的配置文件和关联的文件夹统一放到/opt/docker-mysql中
+二、配置文件
+mkdir -p /opt/docker-mysql/conf.d 增加并修改配置文件config-file.cnf
+内容如下,设置表名不区分大小写; linux下默认是区分的，windows下默认不区分
+sudo tee /opt/docker-mysql/conf.d/config-file.cnf &amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;[mysqld]# 表名不区分大小写lower_case_table_names=1 #server-id=1datadir=/var/lib/mysql#socket=/var/lib/mysql/mysqlx.sock#symbolic-links=0# sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES [mysqld_safe]log-error=/var/log/mysqld.logpid-file=/var/run/mysqld/mysqld.pidEOF 三、启动 增加数据文件夹
+mkdir -p /opt/docker-mysql/var/lib/mysql 启动，设置默认密码 123456-abc
+docker run --name mysql \  --restart=always \  -p 3306:3306 \  -v /opt/docker-mysql/conf.d:/etc/mysql/conf.d \  -v /opt/docker-mysql/var/lib/mysql:/var/lib/mysql \  -e MYSQL_ROOT_PASSWORD=123456-abc \  -d mysql:8.0.16 四、 常用命令 进入容器
+docker exec -it mysql bash 查看日志</description>
+    </item>
+    
+    <item>
+      <title>github 上各式各样的小徽章</title>
+      <link>http://localhost:1313/blog/post/developtools/%E5%90%84%E5%BC%8F%E5%90%84%E6%A0%B7%E7%9A%84%E5%B0%8F%E5%BE%BD%E7%AB%A0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/developtools/%E5%90%84%E5%BC%8F%E5%90%84%E6%A0%B7%E7%9A%84%E5%B0%8F%E5%BE%BD%E7%AB%A0/</guid>
+      <description>###徽章来源 徽章有不同的分类,不管是哪种分类,在线徽章最为简单便捷,下面就简单介绍下提供在线生成徽章的网站.
+https://shields.io/
+https://badgen.net/
+https://forthebadge.com/
+https://badge.fury.io/
+https://github.com/boennemann/badges</description>
+    </item>
+    
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/blog/post/hexo/hello-world/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/hexo/hello-world/</guid>
+      <description>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick Start Create a new post $ hexo new &amp;#34;My New Post&amp;#34; More info: Writing
+Run server $ hexo server More info: Server
+Generate static files $ hexo generate More info: Generating
+Deploy to remote sites $ hexo deploy More info: Deployment</description>
+    </item>
+    
+    <item>
+      <title>Hexo</title>
+      <link>http://localhost:1313/blog/post/hexo/hexo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/hexo/hexo/</guid>
+      <description>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick Start Create a new post $ hexo new &amp;#34;My New Post&amp;#34; More info: Writing
+Run server $ hexo server More info: Server
+Generate static files $ hexo generate More info: Generating
+Deploy to remote sites $ hexo deploy More info: Deployment</description>
+    </item>
+    
+    <item>
+      <title>java BIO、NIO、AIO</title>
+      <link>http://localhost:1313/blog/post/java/java-bio-nio-aio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/java-bio-nio-aio/</guid>
+      <description>带着问题去学习
+  BIO、NIO、AIO 的区别是什么？
+  同/异步、阻/非阻塞的区别是什么？
+  文件读写最优雅的实现方式是什么？
+  NIO 如何实现多路复用功能？
+  一、IO 介绍
+I/O输入/输出(Input/Output)，分为IO设备和IO接口两个部分。
+BIO、NIO、AIO的区别
+BIO 就是传统的 java.io 包，它是基于流模型实现的，交互的方式是同步、阻塞方式。优点: 就是代码比较简单、直观；缺点: IO 的效率和扩展性很低，容易成为应用性能瓶颈。
+NIO 是 Java 1.4 引入的 java.nio 包，提供了 Channel、Selector、Buffer 等新的抽象，可以构建多路复用的、同步非阻塞 IO 程序，同时提供了更接近操作系统底层高性能的数据操作方式。优点: ；缺点: 。
+AIO 是 Java 1.7 之后引入的包，是 NIO 的升级版本，提供了异步非堵塞的 IO 操作方式，所以人们叫它 AIO（Asynchronous IO），异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。
+NIO和IO的主要区别
+下表总结了Java IO和NIO之间的主要区别：
+   组合方式 性能分析 &amp;ndash; 优点 缺点     IO 面向流 同步 阻塞 代码简单 直观 性能低 资源浪费 不易扩展   NIO 面向缓冲 多路复用 同步 非阻塞 高性能 易扩展 代码实现比较复杂,需要对多线程   AIO 面向缓冲 多路复用 异步 非阻塞 windows下高性能,不同操作系统不同表现 底层封装,不易扩展    二、同步、异步、阻塞、非阻塞</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/computer/ide%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F-/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/ide%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F-/</guid>
+      <description>#IDE硬盘数据传输模式 IDE接口硬盘的数据传输模式，经历过三个不同的技术变化，由最初的PIO模式，到DMA模式，再到Ultra DMA模式。
+#目录
+ 1 传输模式简介 2 PIO模式 3 DMA模式 4 Ultra DMA模式  传输模式简介
+随着技术的发展，产品对数据传输速度要求的提高，IDE接口硬盘的数据传输模式，经历过三个不同的技术变化，由最初的PIO模式，到DMA模式，再到Ultra DMA模式。
+PIO模式
+PIO的英文拼写是“Programming Input/Output Model”，PIO模式是一种通过CPU执行I/O端口指令来进行数据的读写的数据交换模式。是最早先的硬盘数据传输模式，数据传输速率低下，CPU占有率也很高，大量传输数据时会因为占用过多的CPU资源而导致系统停顿，无法进行其它的操作。PIO数据传输模式又分为PIO mode 0、PIO mode 1、PIO mode 2、PIO mode 3、PIO mode 4几种模式，数据传输速率从3.3MB/s到16.6MB/s不等。受限于传输速率低下和极高的CPU占有率，这种数据传输模式很快就被淘汰。
+DMA模式
+DMA的英文拼写是“Direct Memory Access”，汉语的意思就是直接内存访问，是一种不经过CPU而直接从内存了存取数据的数据交换模式。PIO模式下硬盘和内存之间的数据传输是由CPU来控制的；而在DMA模式下，CPU只须向DMA控制器下达指令，让DMA控制器来处理数的传送，数据传送完毕再把信息反馈给CPU，这样就很大程度上减轻了CPU资源占有率。DMA模式与PIO模式的区别就在于，DMA模式不过分依赖CPU，可以大大节省系统资源，二者在传输速度上的差异并不十分明显。DMA模式又可以分为Single-Word DMA（单字节DMA）和Multi-Word DMA（多字节DMA）两种，其中所能达到的最大传输速率也只有16.6MB/s。
+Ultra DMA模式
+Ultra DMA的英文拼写为“Ultra Direct Memory Access”，一般简写为UDMA，含义是高级直接内存访问。UDMA模式采用16-bit Multi-Word DMA（16位多字节DMA）模式为基准，可以理解为DMA模式的增强版本，它在包含了DMA模式的优点的基础上，又增加了CRC（Cyclic Redundancy Check循环冗余码校验）技术，提高数据传输过程中的准确性，安全性得到保障。在以往的硬盘数据传输模式下，一个时钟周期只传输一次数据，而在UDMA模式中逐渐应用了Double Data Rate（双倍数据传输）技术，因此数据传输速度有了极大的提高。此技术就是在时钟的上升期和下降期各自进行一次数据传输，可以是数据传输速度成倍的增长。 在UDMA模式发展到UDMA133之后，受限于IDE接口的技术规范，无论是连接器、连接电缆、信号协议都表现出了很大的技术瓶颈，而且其支持的最高数据传输率也有限。同时在IDE接口传输率提高，也就是工作频率的提高，IDE接口交叉干扰、地线增多、信号混乱等缺陷也给其发展带来了很大的制约，被新一代的SATA接口取代也就在所难免了
+文章择自百度百科</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/computer/m.2%E5%92%8Csata%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/m.2%E5%92%8Csata%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98/</guid>
+      <description>硬盘的接口经过了多种变化和革新，SATA、M.2、PCIe、mSATA和U.2等等，这些接口之间有何不同，我们该如何选择什么样接口的固态硬盘？今天，就给大家分享接口不同有啥区别。
+不同的接口
+1、SATA3.0
+这个接口是普及度最高的硬盘接口，普通的2.5英寸固态硬盘和机械硬盘都是这种接口，带宽6Gbps，兼容程度好是它最大的特点。
+2、mSATA
+过去mSATA接口是笔记本硬盘的主流接口，适合轻薄本使用，和SATA一样，只是SATA接口的缩小版本而已，但是随着M.2接口的出现，这个接口基本被淘汰了。
+3、M.2
+这是新一代的接口标准，非常小，传输速度更快，笔记本最常用。
+M.2接口又有B key和M key之分，也就是socket2和socket3。socket2走SATA通道和PCI-E2.0 X4通道，速度为700MB/s和550MB/s。而socket3走PCI-E 3.0 X4通道，速度可达32Gbps，带宽约4GB/s，非常快，现在的M.2接口一直在普及socket3。
+4、PCI-E/U.2
+PCI-E固态硬盘比较少，都是旗舰级的，因为使用PCI-E接口可以达到非常快的传输速度，性能很强，所以成本也很高。
+U.2接口普及率不高，现在也很少见到有这种接口的硬盘了。
+SATA和M.2
+现在主流的接口就是SATA和M.2接口，SATA因为使用很久，所以所有主板都会提供这个接口，兼容性很好，M.2在某些主板上可能并未提供。SATA接口在机械硬盘时代是完全够用的，但是现在固态硬盘越来越普及，SATA接口的速度已经无法满足了。
+所以才推出了M.2接口。其实在M.2接口之外，还出现过SATA Express接口，速度也是非常快的，但是由于固态硬盘由SATA走向PCIE，所以这个接口的设备并没有发展起来，主板上已经不再使用这种接口了。
+而M.2接口之所以可以普及，是因为不仅速度快，体积还特别小，不管是台式机主板也好还是轻薄本主板，都适用。
+如果是旧电脑要升级硬盘的话，最好需要先了解一下自己的主板有没有M.2接口，目前Intel 100系和AMD 300系主板以后都有M.2接口，笔记本方面目前M.2接口通常只有一个，而且已经提供给预装的固态硬盘使用了，不会有多余的。
+如果是新电脑的话，选择固态硬盘时，最好选M.2接口的，和SATA接口的速度差距还是比较明显的，虽然会更贵一些，但是价格差距也就在100元左右，不算太大。</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/computer/nvmesata%E6%9C%89%E5%95%A5%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/nvmesata%E6%9C%89%E5%95%A5%E5%8C%BA%E5%88%AB/</guid>
+      <description>随着NAND技术的升级迭代，堆栈层数不断提高使得SSD单位容量成本不断下降，消费级市场基本已经成为了SSD的天下。目前主流的SSD大致有两种接口，分别是M.2和SATA两种类型。
+NVMe/SATA有啥区别
+SATA接口的SSD执行的AHCI协议标准，是目前较为成熟、常见的SSD接口。采用SATA接口的SSD价格相对来说比较低，较为适合入门级以及对SSD性能要求较低的用户群体，传输带宽限制为6Gbps，采用AHCI协议。M.2接口分为NVMe协议以及AHCI协议，根据协议不同M.2接口的SSD在性能上也会有着一些差异，NVMe协议最高理论速度为32Gbps。
+所以我们可以这样理解，对SATA SSD来说来说使用AHCI协议是正确的选择，以此可以获得更好的性能和价格；而随着闪存技术的不断升级迭代，采用AHCI协议的SATA SSD性能已经无法满足消费者的性能需求，所以NVMe协议标准的M.2 SSD应运而生。
+NVMe SSD有啥优势
+NVMe与AHCI一样都是逻辑设备接口标准，全称Non-Volatile Memory Express，它在设计之初就有充分利用到PCI-E SSD的低延时以及并行性，还有当代处理器、平台与应用的并行性，由此可以相对于AHCI标准的SATA或者M.2 SSD来说，NVMe协议标准可以带来多方面的性能提升。
+作为时下最新的传输协议，NVMe的优势是十分明显的。首先是延时更低；还有就是更大的iops以及更低的功耗和更广的驱动实用性。所以我们看到，SATA 6Gbps和AHCI已经逐渐成为存储设备发展瓶颈，而NVMe标准的存储产品也开始不断占领高性能市场。
+小白怎么买？
+NVMe本质上就是在SSD和计算机之间建议多个数据传输通道，所以数据传输效率自然要比SATA接口的AHCI SSD呈现倍数级的提升。
+相信到这里我们已经对SATA SSD和NVMe SSD有了一个全面的认识。主流的SATA3.0通道的最大传输速度为6Gbps，实际速度最大为560MB/s左右；采用了NVMe协议的M.2固态硬盘读取速度可以达到3.5GB/s左右，平均传统SATA固态硬盘的6倍！所以我们可以看到二者在性能方面的差距十分明显，对于SSD有高性能需求的消费者可以考虑采用NVMe 协议的M.2 SSD，对SSD性能需求较低的小伙伴选择SATA SSD即可。</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/java/java-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/java-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</guid>
+      <description>字符流读写文件
+ public class A{  /** * 向文件写数据 * @param fileName * @param content */  private void wite2file(String fileName,String content){  new Thread(()-&amp;gt;{  String filePath = &amp;#34;D:/a/b&amp;#34;;  File dir = new File(filePath);  // 一、检查放置文件的文件夹路径是否存在，不存在则创建  if (!dir.exists()) {  dir.mkdirs();// mkdirs创建多级目录  }  File checkFile = new File(filePath + File.separator+fileName);  FileWriter writer = null;  try {  // 二、检查目标文件是否存在，不存在则创建  if (!checkFile.exists()) {  checkFile.</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/java/java-nio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/java-nio/</guid>
+      <description>概述
+ nio的使用场景非常多netty,tomcat,jetty,redis等.
+ 什么是io
+百度百科:
+I/O输入/输出(Input/Output)，分为IO设备和IO接口两个部分。
+在POSIX兼容的系统上，例如Linux系统，I/O操作可以有多种方式，比如DIO(Direct I/O)，AIO(Asynchronous，I/O 异步I/O)，Memory-Mapped I/O(内存映设I/O)等，不同的I/O方式有不同的实现方式和性能，在不同的应用中可以按情况选择不同的I/O方式。
+CPU与IO设备间数据传输主要有四种方式： 查询控制方式：
+CPU通过程序主动读取状态寄存器以了解接口情况，并完成相应的数据操作。查询操作需要在时钟周期较少的间隔内重复进行，因而CPU效率低。
+中断控制方式：
+当程序常规运行中，若外部有优先级更高的事件出现，则通过中断请求通知CPU，CPU再读取状态寄存器确定事件的种类，以便执行不同的分支处理。这种方式CPU效率高且实时性好。
+DMA（Direct Memory Access）控制方式：
+顾名思义，直接内存存取即数据传送的具体过程直接由硬件（DMA控制器）在内存和IO之间完成，CPU只在开始时将控制权暂时交予DMA，直到数据传输结束。这种方式传送速度比通过CPU快，尤其是在批量传送时效率很高。
+通道控制方式：
+基本方法同上述的DMA控制方式，只是DMA通过DMA控制器完成，通道控制方式有专门通讯传输的通道总线完成。效率比DMA更高。
+DMA DMA（Direct Memory Access）控制器是一种在系统内部转移数据的独特外设，可以将其视为一种能够通过一组专用总线将内部和外部存储器与每个具有DMA能力的外设连接起来的控制器。它之所以属于外设，是因为它是在处理器的编程控制下来 执行传输的。
+DMA既可以指内存和外设直接存取数据这种内存访问的计算机技术，又可以指实现该技术的硬件模块（对于通用计算机PC而言，DMA控制逻辑由CPU和DMA控制接口逻辑芯片共同组成，嵌入式系统的DMA控制器内建在处理器芯片内部，一般称为DMA控制器，DMAC）。
+几种io模型 在网络环境下，通俗的讲，将IO分为两步：
+1.等(数据准备时间)
+2.数据搬迁
+如果要想提高IO效率，需要将等的时间降低。五种IO模型包括：阻塞IO、非阻塞IO、信号驱动IO、IO多路复用、异步IO。其中，前四个被称为同步IO。 在介绍五种IO模型时，我会举生活中钓鱼的例子，加深理解。</description>
+    </item>
+    
+    <item>
+      <title>java-oop 面向对象</title>
+      <link>http://localhost:1313/blog/post/java/java-oop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/java-oop/</guid>
+      <description>java oop(oriented-object-programing)面向对象编程
+三大特性
+ 封装 继承 多态  什么是面向对象?
+面向对象说到底就是一种思想，任何事物都可以看作是一个对象.用一句话解释,万物皆对象. 1、封装
+隐藏对象的属性和实现细节，仅对外提供公共访问方式，将变化隔离，便于使用，提高复用性和安全性。
+2、继承
+提高代码复用性；继承是多态的前提。
+3、多态
+父类或接口定义的引用变量可以指向子类或具体实现类的实例对象。提高了程序的拓展性。</description>
+    </item>
+    
+    <item>
+      <title>Java带资源的try语句（try-with-resource）</title>
+      <link>http://localhost:1313/blog/post/java/try%E8%AF%AD%E5%8F%A5try-with-resource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/try%E8%AF%AD%E5%8F%A5try-with-resource/</guid>
+      <description>带资源的try语句（try-with-resource）的最简形式为：
+try(Resource res = xxx)//可指定多个资源 {  work with res } try块退出时，会自动调用res.close()方法，关闭资源。
+PS:在coreJava第9版的第一卷的486页有解释。
+补充一下,在没有这个语法之前,流操作一般是这样写的:
+ InputStream is = null; OutputStream os = null; try { 	//... } catch (IOException e) { 	//... }finally{ 	try { 	if(os!=null){ 	os.close(); 	} 	if(is!=null){ 	is.close(); 	} 	} catch (IOException e2) { 	//... 	} }	而现在你可以这样写:
+ try( 	InputStream is = new FileInputStream(&amp;#34;...&amp;#34;); 	OutputStream os = new FileOutputStream(&amp;#34;.</description>
+    </item>
+    
+    <item>
+      <title>linux下 安装tesseract和 python使用tesseract-ocr进行图片识别</title>
+      <link>http://localhost:1313/blog/post/ai/%E5%9B%BE%E7%89%87%E8%BD%AC%E6%96%87%E5%AD%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/ai/%E5%9B%BE%E7%89%87%E8%BD%AC%E6%96%87%E5%AD%97/</guid>
+      <description>centos7安装依赖库
+yum install -y automake autoconf libtool gcc gcc-c++ yum install -y libpng-devel libjpeg-devel libtiff-devel yum -y install python-devel yum -y install openssl-devel yum -y install opencv yum install -y libffi libffi-devel yum install libmount -y 如果需要tesseract，则需要安装leptonica
+http://www.leptonica.org/download.html https://github.com/DanBloomberg/leptonica  wget https://github.com/DanBloomberg/leptonica/archive/1.79.0.zip unzip 1.79.0.zip cd 1.79.0/ ./autogen.sh ./configure make &amp;amp;&amp;amp; make install 安装tesseract4 .0
+https://github.com/tesseract-ocr/tesseract  wget https://github.com/tesseract-ocr/tesseract/archive/5.0.0-alpha.zip 或者下面这个 wget http://linux-1251121573.cosgz.myqcloud.com/soft/tesseract/4.0.0-beta.1.tar.gz  unzip master.zip cd tesseract-master/ ./autogen.sh ./configure make &amp;amp;&amp;amp; make install ldconfig .</description>
+    </item>
+    
+    <item>
+      <title>SATA硬盘工作模式</title>
+      <link>http://localhost:1313/blog/post/computer/sata%E7%A1%AC%E7%9B%98%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/sata%E7%A1%AC%E7%9B%98%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/</guid>
+      <description>一、SATA硬盘有两种工作模式，都可以使用。IDE传输模式兼容性好些，AHCI传输速度快些。但并不是说AHCI模式下，硬盘的性能会有多大提高。硬盘的性能主要还是在读写速度上，传输不是硬盘的瓶胫。 IDE 模式
+IDE的英文全称为“Integrated Drive Electronics”，即“电子集成驱动器”，它的本意是指把“硬盘控制器”与“盘体”集成在一起的硬盘驱动器。把盘体与控制器集成在一起的做法减少了硬盘接口的电缆数目与长度，数据传输的可靠性得到了增强，硬盘制造起来变得更容易，因此硬盘生产厂商不需要再担心自己的硬盘是否与其它厂商生产的控制器兼容。 AHCI模式 AHCI（Serial ATA Advanced Host Controller Interface）串行ATA高级主控接口/高级主机控制器接口），是在Intel的指导下，由多家公司联合研发的接口标准，它允许存储驱动程序启用高级串行 ATA 功能。
+二、使用AHCI模式应注意的问题 如果在安装操作系统是就使用AHCI模式，需要加载AHCI驱动程序。WINDOWS在安装引导时，按F6可以加载驱动。如果不加载驱，安装完后启动操作系统会蓝屏。
+如果一个操作系统是在SATA的IDE模式下工，想切换为AHCI模式，先在操作系统中把驱动程序安装好后，再在BIOS中切换SATA工作模式为AHCI。 早期的操作系统，如WIN XP Win2003等操作系统，安装时最好把SATA模式调在IDE模式。安装完操作系统后，加上AHCI驱动程序，再重启计算机，在BIOS中将SATA模式切换到AHCI模式。
+三种模式的区别如下：
+1、定义不同。
+IDE模式：IDE是表示硬盘的传输接口，也叫ATA（Advanced Technology Attachmen）接口，现在PC机使用的硬盘大多数都是IDE兼容的。
+RAID模式：PADI模式即磁盘阵列模式，简单说就是利用多个硬盘同时工作，来保证数据的安全以及存取速度的。它共有九个模式，以数字命名，为RAID 0、RAID1到RAID 7以及RAID 0+1。 AHCI模式：AHCI本质是一种PCI类设备，在系统内存总线和串行ATA设备内部逻辑之间扮演一种通用接口的角色（即它在不同的操作系统和硬件中是通用的）。
+2、传输速度不同。
+IDE就是ATA模式，是并口传输模式，理论最大133Mb每秒。
+RADIO可以两倍于单块机械硬盘传输性能。
+AHCI就是SATA模式，串口传输模式，传输速度快，理论最大300Mb每秒。
+3、对NCQ的支持不同（NCQ是一种新的硬盘技术，简单来说开启它之后从一个程序跳到另一个程序时速度会更快）。
+IDE模式是将SATA硬盘映射成IDE模式，用SATA硬盘装系统的时候就不需要装SATA硬盘驱动。
+AHCI模式则与SATA模式相反，装系统时需要安装SATA驱动，而且只有这个模式才能打开NCQ功能。</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot AOP</title>
+      <link>http://localhost:1313/blog/post/springboot/springboot-aop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/springboot/springboot-aop/</guid>
+      <description>AOP：面向切面编程，相对于OOP面向对象编程 Spring的AOP的存在目的是为了解耦。AOP可以让一组类共享相同的行为。在OOP中只能继承和实现接口，且类继承只能单继承，阻碍更多行为添加到一组类上，AOP弥补了OOP的不足。
+还有就是为了清晰的逻辑，让业务逻辑关注业务本身，不用去关心其它的事情，比如事务。
+Spring的AOP是通过JDK的动态代理和CGLIB实现的。
+注意：在完成了引入AOP依赖包后，不需要去做其他配置。AOP的默认配置属性中，spring.aop.auto属性默认是开启的，也就是说只要引入了AOP依赖后，默认已经增加了@EnableAspectJAutoProxy，不需要在程序主类中增加@EnableAspectJAutoProxy来启用。 pom.xml
+ &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;2.2.2.RELEASE&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-aop&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;2.2.0.RELEASE&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;1.2.58&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt; controller
+package com.example.springaopdemo.controller;  import org.springframework.web.bind.annotation.PathVariable; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RestController;  @RestController public class AopController {   @RequestMapping(&amp;#34;/getInfo/{name}&amp;#34;)  public String getInfo(@PathVariable(&amp;#34;name&amp;#34;) String name){  return &amp;#34;name: &amp;#34; + name;  }   @RequestMapping(&amp;#34;/exception&amp;#34;)  public void exception(){  throw new RuntimeException(&amp;#34;this is a text exception&amp;#34;);  }  } aspect</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot Jpa</title>
+      <link>http://localhost:1313/blog/post/springboot/springboot-jpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/springboot/springboot-jpa/</guid>
+      <description>SpringBoot中使用SpringDataJPA
+JPA是什么? JPA(Java Persistence API)是Sun官方提出的Java持久化规范. 为Java开发人员提供了一种对象/关联映射工具来管理Java应用中的关系数据. 它的出现是为了简化现有的持久化开发工作和整合ORM技术. 结束各个ORM框架各自为营的局面.
+JPA仅仅是一套规范,不是一套产品, 也就是说Hibernate, TopLink等是实现了JPA规范的一套产品.
+Spring Data JPA Spring Data JPA是Spring基于ORM框架、JPA规范的基础上封装的一套JPA应用框架,是基于Hibernate之上构建的JPA使用解决方案,用极简的代码实现了对数据库的访问和操作,包括了增、删、改、查等在内的常用功能.
+实践 引入pom
+&amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-data-jpa&amp;lt;/artifactId&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt;  &amp;lt;scope&amp;gt;runtime&amp;lt;/scope&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt;  &amp;lt;optional&amp;gt;true&amp;lt;/optional&amp;gt;  &amp;lt;/dependency&amp;gt; entity
+package com.smile.springbootjpa.entity;  import lombok.Data;  import javax.persistence.Column; import javax.persistence.Entity; import javax.persistence.GeneratedValue; import javax.persistence.Id;  @Entity @Data public class User {   @Id  @GeneratedValue  private Long id;   @Column(nullable = false, unique = true)  private String userName;   @Column(nullable = false)  private String passWord;   @Column(nullable = false, unique = true)  private String email;   @Column(nullable = true, unique = true)  private String nickName;   @Column(nullable = false)  private String regTime;   public User(String userName, String passWord, String email, String nickName, String regTime) {  this.</description>
+    </item>
+    
+    <item>
+      <title>springboot抛弃tomcat</title>
+      <link>http://localhost:1313/blog/post/computer/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8Dio%E6%8E%A7%E5%88%B6%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8Dio%E6%8E%A7%E5%88%B6%E6%96%B9%E5%BC%8F/</guid>
+      <description>操作系统中的几种I/O控制方式
+目录
+一、导读
+二、I/O控制方式
+1、直接程序控制方式
+2、中断驱动控制方式
+3.直接存储器访问控制方式
+4、通道控制方式
+三、参考文献
+ 一、导读 为了有效地实现物理I/O操作，必须通过硬件和软件技术，对 CPU 和 I/O 设备的职能进行合理的分工，以调节系统性能和硬件成本之间的矛盾。
+随着计算机技术的发展，I/O 控制方式也在不断发展。选择和衡量 I/O 控制方式有如下三条原则：
+（1） 数据传送速度足够快，能满足用户的需求但又不丢失数据；
+（2） 系统开销小，所需的处理控制程序少
+（3） 能充分发挥硬件资源的能力，使 I/O 设备尽可能忙，而 CPU 等待时间尽可能少。
+按照I/O控制器功能的强弱以及和 CPU 之间联系方式的不同，可以把 I/O 设备的控制方式和通道控制方式分为四类：直接程序控制方式、中断驱动控制方式、直接存储器访问（DMA）控制方式和通道控制方式。I/O控制方式发展的目标是尽量减少CPU对 I/O 控制的干预，把CPU从繁杂的 I/O 控制事务中解脱出来，以便更多地进行数据处理，提高计算机效率和资源的利用率。它们之间的主要差别在于 CPU 与外围设备并行工作的方式和程度不同。
+二、I/O控制方式 1、直接程序控制方式 直接程序控制方式由用户进程直接控制主存或 CPU 和外围设备之间的信息传送。直接程序控制方式又称为询问方式，或忙/等待方式。通过 I/O 指令或询问指令测试 I/O 设备的忙/闲标志位，决定主存与外围设备之间是否交换一个字符或一个字。
+直接程序控制方式流程图 流程图概述直接程序控制方式的工作流程如下：
+① 当用户进程需要输入数据时，通过 CPU 向控制器发出一条 I/O 指令，启动设备输入数据，同时把状态寄存器中的忙/闲状态 busy 置为1
+② 用户进程进入测试等待状态，在等待过程中，CPU 不断地用一条测试指令检查外围设备状态寄存器中的 busy 位，而外围设备只有在数据传入控制器的数据寄存器之后，才将该 busy 位置为0,。
+③ 处理器将数据寄存器中的数据取出，送入主存指定单元，完成一个字符的I/O操作，接着进行下一个数据的 I/O 操作</description>
+    </item>
+    
+    <item>
+      <title>springboot抛弃tomcat</title>
+      <link>http://localhost:1313/blog/post/springboot/springboot%E6%8A%9B%E5%BC%83tomcat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/springboot/springboot%E6%8A%9B%E5%BC%83tomcat/</guid>
+      <description>直接修改启动类
+package com.smile.client;import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;import org.springframework.context.annotation.AnnotationConfigApplicationContext;import java.util.concurrent.CountDownLatch;@SpringBootApplicationpublic class ClientApplication {public static void main(String[] args) throws InterruptedException {SpringApplication application = new SpringApplication( ClientApplication.class );// 如果是web环境，默认创建AnnotationConfigEmbeddedWebApplicationContext，因此要指定applicationContextClass属性application.setApplicationContextClass( AnnotationConfigApplicationContext.class );application.run( args );// 如果不想让spring容器退出，可以使用以下代码CountDownLatch latch = new CountDownLatch( 1 );latch.await();}} </description>
+    </item>
+    
+    <item>
+      <title>windows 清除端口占用</title>
+      <link>http://localhost:1313/blog/post/windows/windows%E6%B8%85%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/windows/windows%E6%B8%85%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/</guid>
+      <description>在windows操作系统中，查询端口占用和清除端口占用的程序
+netstat -ano|findstr 8080  taskkill /pid {pid} /F </description>
+    </item>
+    
+    <item>
+      <title>yum 安装docker</title>
+      <link>http://localhost:1313/blog/post/docker/yum%E5%AE%89%E8%A3%85docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/docker/yum%E5%AE%89%E8%A3%85docker/</guid>
+      <description>CentOS 7使用yum安装Docker 1.由于之前没有安装过，直接安装 cd /etc/yum.repos.d/ sudo wget http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo sudo yum install -y docker-ce 2.设置启动项 systemctl enable docker.service 3.卸载旧版本 yum remove docker \  docker-client \  docker-client-latest \  docker-common \  docker-latest \  docker-latest-logrotate \  docker-logrotate \  docker-engine </description>
+    </item>
+    
+    <item>
+      <title>五大IO模型</title>
+      <link>http://localhost:1313/blog/post/java/%E4%BA%94%E5%A4%A7io%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/%E4%BA%94%E5%A4%A7io%E6%A8%A1%E5%9E%8B/</guid>
+      <description>在学习NIO之前，我们非常有必要了解一下操作系统中的各种IO模型，否则是不会理解NIO的实现的．
+这篇文章是翻译I/O Multiplexing: The select and poll Functions https://notes.shichao.io/unp/ch6/ 这篇文章中的前半部分关于IO模型的部分．这篇文章中，还对select()等系统调用有更加深入的介绍，各位不妨读一下．
+正文 在Unix下，我们有五种不同的IO模型，分别是：
+阻塞IO(Blocking IO) 非阻塞IO(Nonblocking IO) I/O复用(I/O Multiplexing) 信号驱动IO(signal driven I/O) 异步IO(Asynchronous IO) 对于一个读操作来说，一般会经过下面两个过程：
+等待数据就绪．比如说，对于一个网络连接来说，就是等待数据通过连接到达主机．当数据到达主机时，把数据拷贝到内核中的缓冲区． 将数据从内核拷贝到进程．即把数据从内核的缓冲区拷贝到应用程序的缓冲区． 阻塞IO 最常用的IO模型就是阻塞IO．默认情况下，全部的socket都是阻塞的．其处理过程如下图所示：
+在这个例子中，我们会通过UDP而不是TCP来举例，因为对于UDP来说，等待数据就绪这一步更加直观：要不就是收到了一个数据报，要不就是没收到一个数据报．但是对于TCP来说，还有很多额外的变量．
+上图中的recvfrom是一个系统调用．当我们执行一次系统调用的时候，有一次从用户态到内核态的切换．
+从上图中我们可以看到，进程调用recvfrom之后，这个系统调用并不会立即返回，它会等到数据报到达并且被拷贝到应用程序的缓冲区中，或者出现了一个错误，才会返回．我们称这个过程是阻塞的，应用程序只有在数据报被放入缓冲区之后，才能继续进行．
+非阻塞IO 非阻塞IO和阻塞IO相对，它会告诉内核，&amp;ldquo;当我要你完成的IO操作不能完成时，不要让进程阻塞，你给我返回一个错误就行了&amp;rdquo;．过程如下图所示：
+在上面的三个recvfrom操作中，由于数据并没有就绪，所以内核返回了一个EWOULDBLOCK错误． 在第四个recvfrom中，数据已经就绪了，并且已经被拷贝到我们的应用程序的缓冲区了，内核返回一个OK，然后我们的应用程序处理这些数据． 我们可以看到，在这种模型中，我们需要使用轮询的方式来确定数据到底是否就绪．尽管这会浪费CPU时间，但是仍然是比较常见的模型，一般是在系统函数中用到．
+I/O多路复用 在I/O多路复用中，我们会调用select()或者poll()，并且阻塞在这两个系统调用上．而不是阻塞在recvfrom这个实际的IO操作的系统调用上．下面是I/O多路复用模型的过程图：
+从上图中，我们可以看到，我们会阻塞在select()这个系统调用上，并等待数据到达．当select()告诉我们数据到达时，再通过recvfrom系统调用将数据拷贝到应用程序的缓冲区．
+看到这里，如果各位不了解select()，可能就会有一个疑问．你这不是脱了裤子放屁吗？这不是还是跟阻塞IO模型一样，还是阻塞吗？只不过现在不是阻塞在recvfrom上，而是阻塞在select上而已．而且，现在还多了一次系统调用，那效率不是更低吗？
+多了一次系统调用，确实是I/O多路复用模型的缺点．但是存在即合理，它也有优点．
+它的优点在于，select可以同时监听多个文件描述符，以及感兴趣的事件．所以，我们可以在一个线程中完成之前需要好多个线程才能完成的事情．
+比如，我们想要同时从一个接受来自Socket的数据，以及从文件中读数据．在阻塞IO模型中，我们会这么做：
+1．创建一个线程A，在其中创建一个Socket Server，并通过它的accept()方法，等待客户端的连接并处理数据 2．创建一个线程B，在其中打开文件并且读数据． 这就需要两个线程，对吧？
+而且我们又知道，线程之间的切换是有开销的，也是需要涉及到用户态到内核态的转换．
+而我们在I/O多路复用模型中，可以这样做：
+1．通过注册函数告诉系统，应用程序对于Socket的读事件以及文件的读事件感兴趣 2．通过轮询调用select()方法，查看哪些我们感兴趣的事件已经发生了 3．在同一个线程中，依次进行对应的操作 我们可以看到，在这里我们只需要用一个线程就可以做到在阻塞IO中我们需要两个线程才能做到的事情．这就是I/O复用中的复用的含义．
+信号驱动IO 信号驱动IO使用信号量机制，它告诉内核，当文件描述符准备就绪时，通过SIGIO信号通知我们．过程如下：
+我们首先通过sigaction系统调用安装一个事件处理器．这个操作会立即返回．所以我们的应用程序会继续运行，而不会阻塞． 当数据准备就绪时，内核会给我们的应用程序发出一个SIGIO信号，我们可以继续进行下面的处理： 在信号处理器中，通过recvfrom系统调用将数据从内核缓冲区读取到应用程序缓冲区中 告诉应用程序从缓冲区读取数据并且处理 这种模型的优点是，在等待数据就绪时，应用程序并不会被阻塞．应用程序可以继续运行，只需要在数据就绪时，让时间处理器通知它即可．
+异步IO 异步IO模型跟事件驱动IO模型类似，也是告诉内核，在一定情况下通知我们．但是它跟事件驱动IO模型不同的是，在事件驱动IO模型中，内核会在数据就绪，即数据被拷贝到内核缓冲区时，通知我们．而在异步IO中，内核会在整个操作都被完成，即数据从内核缓冲区拷贝到应用程序缓冲区时，通知我们．如下图所示：
+我们调用aio_read这个系统调用，并且给内核传递下面的数据： 文件描述符，缓冲区指针，缓冲区大小 文件偏移量 当整个操作完成时，如何通知我们 这个系统调用会立即返回，在整个操作完成之前，不会被阻塞 五种IO模型的比较
+同步IO和异步IO POSIX中，定义了下面的两个术语：</description>
+    </item>
+    
+    <item>
+      <title>硬盘接口标准</title>
+      <link>http://localhost:1313/blog/post/computer/%E7%A1%AC%E7%9B%98%E6%8E%A5%E5%8F%A3%E6%A0%87%E5%87%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/%E7%A1%AC%E7%9B%98%E6%8E%A5%E5%8F%A3%E6%A0%87%E5%87%86/</guid>
+      <description>##按顺序 1、ST-506接口
+最早的IBM PC并不带有硬盘，它的BIOS及DOS1.0操作系统也不支持任何硬盘，后来DOS2引入了子目录系统，并添加了对“大容量”存储设备的支持，于是一些公司开始出售供IBMPC使用的硬盘系统，这些硬盘与一块控制卡、一个独立的电源(IBM PC的电源只有63.5W，无法向硬盘供电)被一起装在一个外置的盒子里，并通过一条电缆与插在扩展槽中的一块适配器相连，为了使用这样的硬盘，必须从软驱启动，并加载一个专用设备驱动程序。 1983年，IBM推出了IBMPC的后继产品PC/XT，虽然XT仍然使用8088CPU，但配置却要高得多，加上了一个10MB(随后的XTS机型为20MB)的内置硬盘，IBM把原本放在盒子里的控制卡的功能集成到一块接口控制卡上，构成了我们常说的硬盘控制器。但是XT的BIOS中仍然不带有硬盘读写例程，为此接口控制卡上有一块ROM芯片，其中存有硬盘读写例程，这种现象一直持续到基于80286处理器的PC/AT的推出，硬盘接口控制例程终于被加入到了主板的BIOS中。PC/XT和PC/AT机器使用的硬盘被称为MFM硬盘或ST-506/412硬盘。MFM (ModifiedFrequencyModulation)是指一种编码方案，而ST-506/412则是希捷开发的一种硬盘接口，首先使用这种接口的硬盘为希捷的ST-506及ST-412。ST-506接口使用起来相当简便，它不需要任何特殊的电缆及接头，但是它支持的传输速度很低，因此到了1987年左右这种接口就基本上被淘汰了，采用该接口的老硬盘容量多数都低于200MB。
+2、ESDI接口
+鉴于ST-506接口的低速度，迈拓于1983年开发了ESDI(EnhancedSmallDriveInterface)接口。这种接口把编解码放在了硬盘本身之中，而不是控制卡上，它的理论传输速度是ST-506的2～4倍，一般可达10Mbps。 ESDI接口并没有得到广泛应用，原因之一是它的成本比较高，经过了几个版本之后，它与后出现的低成本高性能的IDE接口相比已没有优势可言，因此在进入九十年代后就逐步被淘汰掉了。Windows9x操作系统中有一个设备驱动程序叫ESDI_506.pdr，显然这个文件的名字来源于古老的ESDI和ST-506接口，但ESDI_506.pdr却是一个IDE接口的驱动程序！
+3、IDE与EIDE接口
+IDE(Integrated Drive Electronics)的本意实际上是指把控制器与盘体集成在一起的硬盘驱动器，我们常说的IDE接口，也叫ATA(Advanced Technology Attachment)接口，现在PC机使用的硬盘大多数都是IDE兼容的，只需用一根电缆将它们与主板或接口卡连起来就可以了。 把盘体与控制器集成在一起的做法减少了硬盘接口的电缆数目与长度，数据传输的可靠性得到了增强，硬盘制造起来变得更容易，因为厂商不需要再担心自己的硬盘是否与其它厂商生产的控制器兼容，对用户而言，硬盘安装起来也更为方便。 ATA接口最初是在1986年由CDC、康柏和西部数据共同开发的，他们决定使用40芯的电缆，最早的IDE硬盘大小为5英寸，容量为40MB，康柏早期的386系统使用了由西部数据制造的IDE硬盘，后来康柏创办了Conner来为自己生产硬盘，但很快又把Conner出售了。ATA接口的一大特点是成本低廉，非常符合PC机的发展特点，因此很快得到大家的认同，从80年代末期开始逐渐取代了其它老式接口，ANSI也专门制定了ATA-1标准，1990年后生产的PC机已经普遍采用ATA接口了。 就在ATA-2成为标准之时，西部数据与希捷掀起了一场接口名称之争。西部数据提出了EIDE(EnhancedIDE)的概念，EIDE实际上包含了ATA-2和ATAPI(ATAPacketInterface)两种标准，后者是为了让CDROM、磁带机等其它设备使用ATA接口而制订的标准，因为ATA-1和ATA-2标准都只考虑了硬盘。希捷为了对付WD的市场策略，也提出了一个Fast-ATA的概念，并得到了昆腾的支持。Fast-ATA实际上就是ATA-2，相对而言，Fast-ATA比EIDE在概念上要更为清晰一些，但是由于CD-ROM驱动器的迅速发展，ATAPI标准得到了普遍应用，Fast-ATA和EIDE两种称呼都经常出现在各种场合，反而产生了很多混淆。ATA接口的最新标准是ATA-3，与ATA-2相比，ATA-3没有增加更高速率的工作模式，但改进了数据传输的可靠性，加入了一个简单的密码保护的安全方案，对电源管理方案进行了修改，并引入了S.M.A.R.T.技术，让硬盘在出错时能够向系统报告。
+DMA(ATA) 100/133
+DMA 100/133并不是新的接口规范，它们只是对EIDE接口的增强。传统的IDE数据传输仅仅利用了单边带的数据脉冲。DMA 100/133则在数据传输时使用了双边带的数据脉冲。因此，使用该技术的硬盘并配合相应的芯片组，最大传输速度可以提高到133MS/s，向下兼容采用 80芯的线40针的接口，支持 CRC 错误检测修正技术。它们最大的优点在于把CPU从大量的数据传输中解放出来了，可以把数据从HDD直接传输到主存而不占用更多的CPU资源，从而在一定程度上提高了整个系统的性能。DMA 100/133已成为目前E-IDE硬盘接口事实上的标准。当然ATA 100/133的数据传输率只是一个理论值，实际使用中是无法达到最大值的，而现在硬盘的最大内部传输率也就在50M/s左右，无法充分发挥ATA 100/133接口的能力。
+4、SATA接口
+目前大多数台式机硬盘采用的都是Ultra ATA 100/133并行总线接口，理论最高速率在133MB/s，随着硬盘内部传输速率的不断提升，很快会成为硬盘性能的瓶颈。而Serial ATA 1.0规范将硬盘的外部传输速率提高到了150MB/s以上，而且随着后续版本的发展，其接口速率还可比较轻松的扩展到600MB/s以上，是未来高性能硬盘的必然选择。并行ATA接口硬盘所使用的80-pin数据线在机箱内部也显得特别粗大、凌乱，它会阻碍空气的流动，进而影响到系统的散热，限制高速CPU等配件的性能发挥。而且并行ATA设计采用12V和5V电压供电，在当今电脑配件不断降低电压、减小功耗的趋势下，这也是需要改进的。而Serial ATA采用±250mV供电，能够有效地减小系统的功耗。串行ATA采用了点对点传输协议，每一个硬盘与主机通信时都独占一个通道，系统中所有的硬盘都是对等的，因此，在串行ATA中将不存在“主/从”盘的区别，用户也不用再费事去设置硬盘的相关跳线了。点对点传输模式还使每一个硬盘都可以独享通道带宽，这对于提高性能是有好处的。
+5、SCSI接口
+SCSI(SmallComputerSystemInterface)是一种与ATA完全不同的接口，它不是专门为硬盘设计的，而是一种总线型的系统接口，每个SCSI总线上可以连接包括SCSI控制卡在内的8个SCSI设备。早期PC机的BIOS不支持SCSI，各个厂商都按照自己对SCSI的理解来制造产品，造成了一个厂商生产的SCSI设备很难与其它厂商生产的SCSI控制卡共同工作，加上SCSI的生产成本比较高，因此没有像ATA接口那样迅速得到普及。SCSI接口的优势在于它支持多种设备，传输速率比ATA接口高，独立的总线使得SCSI设备的CPU占用率很低，所以SCSI更多地被用于服务器等高端应用场合。 ANSI分别于1986年和1994年制订了SCSI-1和SCSI-2标准，一些厂商在这些标准的基础上开发了FastSCSI、UltraSCSI、Ultra2SCSI(LVD)和Ultra160/m等事实上的标准。希捷、IBM等厂商都有自己的SCSI硬盘系列产品，由于目标市场不同，这些SCSI硬盘的转速、缓存大小等指标要比同时期的IDE硬盘高得多。 EIDE硬盘的接口技术在不断进步时，SCSI硬盘的接口技术也在迅速发展。目前开始普遍采用Ultra2SCSI(LVD)传输模式。LVD代表低电压差分技术，16位Ultra2SCSI(LVD)接口的最高传输速率可达80MB/s，除了速度上的提升外，Ultra2SCSI(LVD)允许接口电缆的最大长度为12米，比起UltraSCSI的1.5米限制有了极大的进步，大大增强了设备配置的灵活性。Ultra160/mSCSI也被引入硬盘界，对硬盘在高计算量应用领域的性能扩展极有裨益，处理关键任务的服务器、图形工作站、冗余磁盘阵列(RAID)等设备将因此得到性能提升。而目前的硬盘厂商为使产品适应不同领域的需求，将Ultra160/mSCSI技术与光纤界面技术集成在一块硬盘上，使硬盘的应用领域更加广阔，不但可以支持服务器、图形工作站、冗余磁盘阵列应用，还可以支持SAN等新型应用。
+6、NVMe接口
+NVM Express是标准和信息的开放收集，以充分展示非易失性存储器在从移动设备到数据中心的所有类型的计算环境中的优势。NVMe从头开始设计，可为当前和将来的NVM技术提供高带宽和低延迟的存储访问。NVM Express标准包括： NVM Express –用于PCI Express附加存储的寄存器接口和命令集，以及适用于多种操作系统的行业标准软件。NVMe被广泛认为是PCIeSSD的事实上的行业标准。NVMe管理界面–用于NVM Express存储的带外管理的命令集和体系结构（例如，使用BMC发现，监视和更新NVMe设备）。架构上的NVMe – NVM Express的扩展，可通过PCIe以外的其他传输方式对NVM Express命令集进行隧道传输。NVMe over Fabric通过允许同一协议扩展到各种网络接口上，扩展了在全球最大的数据中心中大规模高效存储架构的优势。</description>
+    </item>
+    
+  </channel>
+</rss>

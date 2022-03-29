@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on ExampleSite</title>
+    <link>http://localhost:1313/blog/tags/docker/</link>
+    <description>Recent content in docker on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 30 May 2018 15:20:36 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS 安装ali yum 源</title>
+      <link>http://localhost:1313/blog/post/docker/docker%E5%8A%A0%E9%80%9Fali%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</link>
+      <pubDate>Wed, 30 May 2018 15:20:36 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/docker/docker%E5%8A%A0%E9%80%9Fali%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</guid>
+      <description>配置镜像加速器 针对Docker客户端版本大于 1.10.0 的用户
+您可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器
+sudo mkdir -p /etc/docker sudo tee /etc/docker/daemon.json &amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39; { &amp;#34;registry-mirrors&amp;#34;: [&amp;#34;https://pt4rrit7.mirror.aliyuncs.com&amp;#34;] } EOF sudo systemctl daemon-reload sudo systemctl restart docker </description>
+    </item>
+    
+    <item>
+      <title>Docker安装Mysql</title>
+      <link>http://localhost:1313/blog/post/docker/docker%E5%AE%89%E8%A3%85mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/docker/docker%E5%AE%89%E8%A3%85mysql/</guid>
+      <description>一、下载 下载镜像
+docker pull mysql:8.0.16 将全部的配置文件和关联的文件夹统一放到/opt/docker-mysql中
+二、配置文件
+mkdir -p /opt/docker-mysql/conf.d 增加并修改配置文件config-file.cnf
+内容如下,设置表名不区分大小写; linux下默认是区分的，windows下默认不区分
+sudo tee /opt/docker-mysql/conf.d/config-file.cnf &amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;[mysqld]# 表名不区分大小写lower_case_table_names=1 #server-id=1datadir=/var/lib/mysql#socket=/var/lib/mysql/mysqlx.sock#symbolic-links=0# sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES [mysqld_safe]log-error=/var/log/mysqld.logpid-file=/var/run/mysqld/mysqld.pidEOF 三、启动 增加数据文件夹
+mkdir -p /opt/docker-mysql/var/lib/mysql 启动，设置默认密码 123456-abc
+docker run --name mysql \  --restart=always \  -p 3306:3306 \  -v /opt/docker-mysql/conf.d:/etc/mysql/conf.d \  -v /opt/docker-mysql/var/lib/mysql:/var/lib/mysql \  -e MYSQL_ROOT_PASSWORD=123456-abc \  -d mysql:8.0.16 四、 常用命令 进入容器
+docker exec -it mysql bash 查看日志</description>
+    </item>
+    
+    <item>
+      <title>yum 安装docker</title>
+      <link>http://localhost:1313/blog/post/docker/yum%E5%AE%89%E8%A3%85docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/docker/yum%E5%AE%89%E8%A3%85docker/</guid>
+      <description>CentOS 7使用yum安装Docker 1.由于之前没有安装过，直接安装 cd /etc/yum.repos.d/ sudo wget http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo sudo yum install -y docker-ce 2.设置启动项 systemctl enable docker.service 3.卸载旧版本 yum remove docker \  docker-client \  docker-client-latest \  docker-common \  docker-latest \  docker-latest-logrotate \  docker-logrotate \  docker-engine </description>
+    </item>
+    
+  </channel>
+</rss>

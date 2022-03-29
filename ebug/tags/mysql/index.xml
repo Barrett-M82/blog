@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on ExampleSite</title>
+    <link>http://localhost:1313/blog/tags/mysql/</link>
+    <description>Recent content in mysql on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 26 Mar 2022 23:15:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/blog/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2022 03 26</title>
+      <link>http://localhost:1313/blog/post/mysql/mysql-%E4%B9%90%E8%A7%82%E9%94%81%E6%82%B2%E8%A7%82%E9%94%81/</link>
+      <pubDate>Sat, 26 Mar 2022 23:15:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/mysql/mysql-%E4%B9%90%E8%A7%82%E9%94%81%E6%82%B2%E8%A7%82%E9%94%81/</guid>
+      <description>mysql 乐观锁,悲观锁 MySQL InnoDB中使用悲观锁
+要使用悲观锁，必须关闭mysql数据库的自动提交属性，因为MySQL默认使用autocommit模式，也就是当你执行一个更新操作后，MySQL会立即将结果进行提交
+//开始事务  begin;/begin work;/start transaction;（三者选一个）  select status from t_goods where id=1 for update;  //根据商品信息生成订单  insert into t_orders (id,goods_id) values (null,1);  //修改商品status为2  update t_goods set status=2;  // 提交事务  commit;/commit work; 以上查询语句中，使用了select&amp;hellip;for update方式，通过开启排他锁的方式实现了悲观锁。则相应的记录被锁定，其他事务必须等本次事务提交之后才能够执行
+我们使用select &amp;hellip; for update会把数据给锁定，不过我们需要注意一些锁的级别，MySQL InnoDB默认行级锁。行级锁都是基于索引的，如果一条SQL用不到索引是不会使用行级锁的，会使用表级锁把整张表锁住。
+特点
+为数据处理的安全提供了保证
+效率上，由于处理加锁的机制会让数据库产生额外开销，增加产生死锁机会
+在只读型事务中由于不会产生冲突，也没必要使用锁，这样会增加系统负载，降低并行性
+**乐观锁 **
+乐观并发控制也是一种并发控制的方法。
+假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据，在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没其他事务修改该数据，如果有则回滚正在提交的事务
+乐观锁相对悲观锁而言，是假设数据不会发生冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误信息，让用户决定如何做
+乐观锁实现一般使用记录版本号，为数据增加一个版本标识，当更新数据的时候对版本标识进行更新
+实现
+使用版本号时，可以在数据初始化时指定一个版本号，每次对数据的更新操作都对版本号执行+1操作。并判断当前版本号是不是该数据的最新版本号
+1.查询出商品信息  select (status,status,version) from t_goods where id=#{id}  2.根据商品信息生成订单  3.</description>
+    </item>
+    
+  </channel>
+</rss>

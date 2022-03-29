@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html><body>#导航栏
+<nav class="nav">
+<ul>
+    
+    
+    <li><a href="/blog/">首页</a></li>
+     
+    
+    <li><a href="/blog/post">博文</a></li>
+     
+</ul>
+</nav><div id="content">
+
+<div id="post" class="post">
+    <article>
+        <header>
+            <h1 class="post-title">linux下 安装tesseract和 python使用tesseract-ocr进行图片识别</h1>
+        </header>
+        <p>centos7安装依赖库</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yum install -y automake autoconf libtool gcc gcc-c++ 
+</span></span><span style="display:flex;"><span>yum install -y libpng-devel libjpeg-devel libtiff-devel
+</span></span><span style="display:flex;"><span>yum -y install  python-devel
+</span></span><span style="display:flex;"><span>yum -y install openssl-devel   
+</span></span><span style="display:flex;"><span>yum -y install opencv 
+</span></span><span style="display:flex;"><span>yum install -y libffi libffi-devel
+</span></span><span style="display:flex;"><span>yum install libmount  -y
+</span></span></code></pre></div><p>如果需要tesseract，则需要安装leptonica</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://www.leptonica.org/download.html
+</span></span><span style="display:flex;"><span>https://github.com/DanBloomberg/leptonica
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>wget https://github.com/DanBloomberg/leptonica/archive/1.79.0.zip
+</span></span><span style="display:flex;"><span>unzip 1.79.0.zip
+</span></span><span style="display:flex;"><span>cd 1.79.0/
+</span></span><span style="display:flex;"><span>./autogen.sh
+</span></span><span style="display:flex;"><span>./configure 
+</span></span><span style="display:flex;"><span>make <span style="color:#f92672">&amp;&amp;</span> make install
+</span></span></code></pre></div><p><strong>安装tesseract4 .0</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>https://github.com/tesseract-ocr/tesseract
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>wget https://github.com/tesseract-ocr/tesseract/archive/5.0.0-alpha.zip
+</span></span><span style="display:flex;"><span>或者下面这个
+</span></span><span style="display:flex;"><span>wget http://linux-1251121573.cosgz.myqcloud.com/soft/tesseract/4.0.0-beta.1.tar.gz
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>unzip master.zip
+</span></span><span style="display:flex;"><span>cd tesseract-master/
+</span></span><span style="display:flex;"><span>./autogen.sh
+</span></span><span style="display:flex;"><span>./configure
+</span></span><span style="display:flex;"><span>make <span style="color:#f92672">&amp;&amp;</span> make install
+</span></span><span style="display:flex;"><span>ldconfig
+</span></span></code></pre></div><h3 id="configure报错">./configure报错</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>configure: error: Leptonica 1.74 or higher is required. Try to install libleptonica-dev package.
+</span></span></code></pre></div><h3 id="leptonica-174-or-higher-is-required-的解决办法">Leptonica 1.74 or higher is required. 的解决办法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pkg-config的检查可以在 terminal 中输入
+</span></span><span style="display:flex;"><span>pkg-config
+</span></span><span style="display:flex;"><span>如果提示 command not found, 那说明本机没有 pkg-config, 通过 
+</span></span><span style="display:flex;"><span>yum install pkg-config 
+</span></span><span style="display:flex;"><span>或 
+</span></span><span style="display:flex;"><span>apt-get install pkg-config 
+</span></span><span style="display:flex;"><span>来进行安装.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>开始添加环境变量
+</span></span><span style="display:flex;"><span>vim /etc/profile 
+</span></span><span style="display:flex;"><span>在文件最后加入以下几行文本:
+</span></span><span style="display:flex;"><span>export LD_LIBRARY_PATH<span style="color:#f92672">=</span>$LD_LIBRARY_PAYT:/usr/local/lib
+</span></span><span style="display:flex;"><span>export LIBLEPT_HEADERSDIR<span style="color:#f92672">=</span>/usr/local/include
+</span></span><span style="display:flex;"><span>export PKG_CONFIG_PATH<span style="color:#f92672">=</span>/usr/local/lib/pkgconfig
+</span></span><span style="display:flex;"><span>编辑好后在 terminal中输入
+</span></span><span style="display:flex;"><span>source /etc/profile
+</span></span><span style="display:flex;"><span>回到 tesseract 源码文件夹下
+</span></span><span style="display:flex;"><span>make <span style="color:#f92672">&amp;&amp;</span> make install
+</span></span></code></pre></div><h3 id="5安装中英文语言包">5.安装中英文语言包。</h3>
+<p>找到在百度云盘下载的那些文件中的剩余文件，即chi_sim.traineddata、eng.traineddata、eng.traineddata.part三个文件，并把它们放到根目录中。</p>
+<p>这个时候我们先来查看一下在/usr/local/share中是否有tessdata文件夹：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /usr/local/share
+</span></span><span style="display:flex;"><span>ls
+</span></span></code></pre></div><p>发现确实已有tessdata文件夹，接着我们将刚刚的三个文件拷贝到tessdata文件夹下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cp chi_sim.traineddata /usr/local/share/tessdata
+</span></span><span style="display:flex;"><span>cp eng.traineddata /usr/local/share/tessdata
+</span></span><span style="display:flex;"><span>cp eng.traineddata.part /usr/local/share/tessdata
+</span></span></code></pre></div><p>到现在基本的安装编译工作已经完成。接着进行测试。</p>
+
+        <br />
+
+        <div>
+            
+            <a href="http://localhost:1313/blog/post/computer/sata%E7%A1%AC%E7%9B%98%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/">前一页</a>
+            
+            
+            <a href="http://localhost:1313/blog/post/java/try%E8%AF%AD%E5%8F%A5try-with-resource/">后一页</a>
+            
+        </div>
+    </article>
+</div>
+
+
+        </div><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script></body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html><body>#导航栏
+<nav class="nav">
+<ul>
+    
+    
+    <li><a href="/blog/">首页</a></li>
+     
+    
+    <li><a href="/blog/post">博文</a></li>
+     
+</ul>
+</nav><div id="content">
+
+<div id="post" class="post">
+    <article>
+        <header>
+            <h1 class="post-title">Java带资源的try语句（try-with-resource）</h1>
+        </header>
+        <p>带资源的try语句（try-with-resource）的最简形式为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span><span style="color:#f92672">(</span>Resource res <span style="color:#f92672">=</span> xxx<span style="color:#f92672">)</span><span style="color:#75715e">//可指定多个资源
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>     work with res
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>                                                                        
+</span></span></code></pre></div><p>try块退出时，会自动调用res.close()方法，关闭资源。</p>
+<p>PS:在coreJava第9版的第一卷的486页有解释。</p>
+<p>补充一下,在没有这个语法之前,流操作一般是这样写的:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>InputStream is <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>OutputStream os <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span><span style="color:#66d9ef">finally</span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>os<span style="color:#f92672">!=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>			os<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>is<span style="color:#f92672">!=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>			is<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e2<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>	
+</span></span></code></pre></div><p>而现在你可以这样写:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span><span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>	InputStream is <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileInputStream<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>	OutputStream os <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileOutputStream<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>生活一下就美好了</p>
+
+        <br />
+
+        <div>
+            
+            <a href="http://localhost:1313/blog/post/ai/%E5%9B%BE%E7%89%87%E8%BD%AC%E6%96%87%E5%AD%97/">前一页</a>
+            
+            
+            <a href="http://localhost:1313/blog/post/java/java-oop/">后一页</a>
+            
+        </div>
+    </article>
+</div>
+
+
+        </div><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script></body>
+</html>

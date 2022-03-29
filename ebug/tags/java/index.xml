@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on ExampleSite</title>
+    <link>http://localhost:1313/blog/tags/java/</link>
+    <description>Recent content in java on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="http://localhost:1313/blog/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java BIO、NIO、AIO</title>
+      <link>http://localhost:1313/blog/post/java/java-bio-nio-aio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/java-bio-nio-aio/</guid>
+      <description>带着问题去学习
+  BIO、NIO、AIO 的区别是什么？
+  同/异步、阻/非阻塞的区别是什么？
+  文件读写最优雅的实现方式是什么？
+  NIO 如何实现多路复用功能？
+  一、IO 介绍
+I/O输入/输出(Input/Output)，分为IO设备和IO接口两个部分。
+BIO、NIO、AIO的区别
+BIO 就是传统的 java.io 包，它是基于流模型实现的，交互的方式是同步、阻塞方式。优点: 就是代码比较简单、直观；缺点: IO 的效率和扩展性很低，容易成为应用性能瓶颈。
+NIO 是 Java 1.4 引入的 java.nio 包，提供了 Channel、Selector、Buffer 等新的抽象，可以构建多路复用的、同步非阻塞 IO 程序，同时提供了更接近操作系统底层高性能的数据操作方式。优点: ；缺点: 。
+AIO 是 Java 1.7 之后引入的包，是 NIO 的升级版本，提供了异步非堵塞的 IO 操作方式，所以人们叫它 AIO（Asynchronous IO），异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。
+NIO和IO的主要区别
+下表总结了Java IO和NIO之间的主要区别：
+   组合方式 性能分析 &amp;ndash; 优点 缺点     IO 面向流 同步 阻塞 代码简单 直观 性能低 资源浪费 不易扩展   NIO 面向缓冲 多路复用 同步 非阻塞 高性能 易扩展 代码实现比较复杂,需要对多线程   AIO 面向缓冲 多路复用 异步 非阻塞 windows下高性能,不同操作系统不同表现 底层封装,不易扩展    二、同步、异步、阻塞、非阻塞</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/computer/ide%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F-/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/ide%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F-/</guid>
+      <description>#IDE硬盘数据传输模式 IDE接口硬盘的数据传输模式，经历过三个不同的技术变化，由最初的PIO模式，到DMA模式，再到Ultra DMA模式。
+#目录
+ 1 传输模式简介 2 PIO模式 3 DMA模式 4 Ultra DMA模式  传输模式简介
+随着技术的发展，产品对数据传输速度要求的提高，IDE接口硬盘的数据传输模式，经历过三个不同的技术变化，由最初的PIO模式，到DMA模式，再到Ultra DMA模式。
+PIO模式
+PIO的英文拼写是“Programming Input/Output Model”，PIO模式是一种通过CPU执行I/O端口指令来进行数据的读写的数据交换模式。是最早先的硬盘数据传输模式，数据传输速率低下，CPU占有率也很高，大量传输数据时会因为占用过多的CPU资源而导致系统停顿，无法进行其它的操作。PIO数据传输模式又分为PIO mode 0、PIO mode 1、PIO mode 2、PIO mode 3、PIO mode 4几种模式，数据传输速率从3.3MB/s到16.6MB/s不等。受限于传输速率低下和极高的CPU占有率，这种数据传输模式很快就被淘汰。
+DMA模式
+DMA的英文拼写是“Direct Memory Access”，汉语的意思就是直接内存访问，是一种不经过CPU而直接从内存了存取数据的数据交换模式。PIO模式下硬盘和内存之间的数据传输是由CPU来控制的；而在DMA模式下，CPU只须向DMA控制器下达指令，让DMA控制器来处理数的传送，数据传送完毕再把信息反馈给CPU，这样就很大程度上减轻了CPU资源占有率。DMA模式与PIO模式的区别就在于，DMA模式不过分依赖CPU，可以大大节省系统资源，二者在传输速度上的差异并不十分明显。DMA模式又可以分为Single-Word DMA（单字节DMA）和Multi-Word DMA（多字节DMA）两种，其中所能达到的最大传输速率也只有16.6MB/s。
+Ultra DMA模式
+Ultra DMA的英文拼写为“Ultra Direct Memory Access”，一般简写为UDMA，含义是高级直接内存访问。UDMA模式采用16-bit Multi-Word DMA（16位多字节DMA）模式为基准，可以理解为DMA模式的增强版本，它在包含了DMA模式的优点的基础上，又增加了CRC（Cyclic Redundancy Check循环冗余码校验）技术，提高数据传输过程中的准确性，安全性得到保障。在以往的硬盘数据传输模式下，一个时钟周期只传输一次数据，而在UDMA模式中逐渐应用了Double Data Rate（双倍数据传输）技术，因此数据传输速度有了极大的提高。此技术就是在时钟的上升期和下降期各自进行一次数据传输，可以是数据传输速度成倍的增长。 在UDMA模式发展到UDMA133之后，受限于IDE接口的技术规范，无论是连接器、连接电缆、信号协议都表现出了很大的技术瓶颈，而且其支持的最高数据传输率也有限。同时在IDE接口传输率提高，也就是工作频率的提高，IDE接口交叉干扰、地线增多、信号混乱等缺陷也给其发展带来了很大的制约，被新一代的SATA接口取代也就在所难免了
+文章择自百度百科</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/computer/m.2%E5%92%8Csata%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/m.2%E5%92%8Csata%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98/</guid>
+      <description>硬盘的接口经过了多种变化和革新，SATA、M.2、PCIe、mSATA和U.2等等，这些接口之间有何不同，我们该如何选择什么样接口的固态硬盘？今天，就给大家分享接口不同有啥区别。
+不同的接口
+1、SATA3.0
+这个接口是普及度最高的硬盘接口，普通的2.5英寸固态硬盘和机械硬盘都是这种接口，带宽6Gbps，兼容程度好是它最大的特点。
+2、mSATA
+过去mSATA接口是笔记本硬盘的主流接口，适合轻薄本使用，和SATA一样，只是SATA接口的缩小版本而已，但是随着M.2接口的出现，这个接口基本被淘汰了。
+3、M.2
+这是新一代的接口标准，非常小，传输速度更快，笔记本最常用。
+M.2接口又有B key和M key之分，也就是socket2和socket3。socket2走SATA通道和PCI-E2.0 X4通道，速度为700MB/s和550MB/s。而socket3走PCI-E 3.0 X4通道，速度可达32Gbps，带宽约4GB/s，非常快，现在的M.2接口一直在普及socket3。
+4、PCI-E/U.2
+PCI-E固态硬盘比较少，都是旗舰级的，因为使用PCI-E接口可以达到非常快的传输速度，性能很强，所以成本也很高。
+U.2接口普及率不高，现在也很少见到有这种接口的硬盘了。
+SATA和M.2
+现在主流的接口就是SATA和M.2接口，SATA因为使用很久，所以所有主板都会提供这个接口，兼容性很好，M.2在某些主板上可能并未提供。SATA接口在机械硬盘时代是完全够用的，但是现在固态硬盘越来越普及，SATA接口的速度已经无法满足了。
+所以才推出了M.2接口。其实在M.2接口之外，还出现过SATA Express接口，速度也是非常快的，但是由于固态硬盘由SATA走向PCIE，所以这个接口的设备并没有发展起来，主板上已经不再使用这种接口了。
+而M.2接口之所以可以普及，是因为不仅速度快，体积还特别小，不管是台式机主板也好还是轻薄本主板，都适用。
+如果是旧电脑要升级硬盘的话，最好需要先了解一下自己的主板有没有M.2接口，目前Intel 100系和AMD 300系主板以后都有M.2接口，笔记本方面目前M.2接口通常只有一个，而且已经提供给预装的固态硬盘使用了，不会有多余的。
+如果是新电脑的话，选择固态硬盘时，最好选M.2接口的，和SATA接口的速度差距还是比较明显的，虽然会更贵一些，但是价格差距也就在100元左右，不算太大。</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/computer/nvmesata%E6%9C%89%E5%95%A5%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/nvmesata%E6%9C%89%E5%95%A5%E5%8C%BA%E5%88%AB/</guid>
+      <description>随着NAND技术的升级迭代，堆栈层数不断提高使得SSD单位容量成本不断下降，消费级市场基本已经成为了SSD的天下。目前主流的SSD大致有两种接口，分别是M.2和SATA两种类型。
+NVMe/SATA有啥区别
+SATA接口的SSD执行的AHCI协议标准，是目前较为成熟、常见的SSD接口。采用SATA接口的SSD价格相对来说比较低，较为适合入门级以及对SSD性能要求较低的用户群体，传输带宽限制为6Gbps，采用AHCI协议。M.2接口分为NVMe协议以及AHCI协议，根据协议不同M.2接口的SSD在性能上也会有着一些差异，NVMe协议最高理论速度为32Gbps。
+所以我们可以这样理解，对SATA SSD来说来说使用AHCI协议是正确的选择，以此可以获得更好的性能和价格；而随着闪存技术的不断升级迭代，采用AHCI协议的SATA SSD性能已经无法满足消费者的性能需求，所以NVMe协议标准的M.2 SSD应运而生。
+NVMe SSD有啥优势
+NVMe与AHCI一样都是逻辑设备接口标准，全称Non-Volatile Memory Express，它在设计之初就有充分利用到PCI-E SSD的低延时以及并行性，还有当代处理器、平台与应用的并行性，由此可以相对于AHCI标准的SATA或者M.2 SSD来说，NVMe协议标准可以带来多方面的性能提升。
+作为时下最新的传输协议，NVMe的优势是十分明显的。首先是延时更低；还有就是更大的iops以及更低的功耗和更广的驱动实用性。所以我们看到，SATA 6Gbps和AHCI已经逐渐成为存储设备发展瓶颈，而NVMe标准的存储产品也开始不断占领高性能市场。
+小白怎么买？
+NVMe本质上就是在SSD和计算机之间建议多个数据传输通道，所以数据传输效率自然要比SATA接口的AHCI SSD呈现倍数级的提升。
+相信到这里我们已经对SATA SSD和NVMe SSD有了一个全面的认识。主流的SATA3.0通道的最大传输速度为6Gbps，实际速度最大为560MB/s左右；采用了NVMe协议的M.2固态硬盘读取速度可以达到3.5GB/s左右，平均传统SATA固态硬盘的6倍！所以我们可以看到二者在性能方面的差距十分明显，对于SSD有高性能需求的消费者可以考虑采用NVMe 协议的M.2 SSD，对SSD性能需求较低的小伙伴选择SATA SSD即可。</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/java/java-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/java-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</guid>
+      <description>字符流读写文件
+ public class A{  /** * 向文件写数据 * @param fileName * @param content */  private void wite2file(String fileName,String content){  new Thread(()-&amp;gt;{  String filePath = &amp;#34;D:/a/b&amp;#34;;  File dir = new File(filePath);  // 一、检查放置文件的文件夹路径是否存在，不存在则创建  if (!dir.exists()) {  dir.mkdirs();// mkdirs创建多级目录  }  File checkFile = new File(filePath + File.separator+fileName);  FileWriter writer = null;  try {  // 二、检查目标文件是否存在，不存在则创建  if (!checkFile.exists()) {  checkFile.</description>
+    </item>
+    
+    <item>
+      <title>java 读写文件</title>
+      <link>http://localhost:1313/blog/post/java/java-nio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/java-nio/</guid>
+      <description>概述
+ nio的使用场景非常多netty,tomcat,jetty,redis等.
+ 什么是io
+百度百科:
+I/O输入/输出(Input/Output)，分为IO设备和IO接口两个部分。
+在POSIX兼容的系统上，例如Linux系统，I/O操作可以有多种方式，比如DIO(Direct I/O)，AIO(Asynchronous，I/O 异步I/O)，Memory-Mapped I/O(内存映设I/O)等，不同的I/O方式有不同的实现方式和性能，在不同的应用中可以按情况选择不同的I/O方式。
+CPU与IO设备间数据传输主要有四种方式： 查询控制方式：
+CPU通过程序主动读取状态寄存器以了解接口情况，并完成相应的数据操作。查询操作需要在时钟周期较少的间隔内重复进行，因而CPU效率低。
+中断控制方式：
+当程序常规运行中，若外部有优先级更高的事件出现，则通过中断请求通知CPU，CPU再读取状态寄存器确定事件的种类，以便执行不同的分支处理。这种方式CPU效率高且实时性好。
+DMA（Direct Memory Access）控制方式：
+顾名思义，直接内存存取即数据传送的具体过程直接由硬件（DMA控制器）在内存和IO之间完成，CPU只在开始时将控制权暂时交予DMA，直到数据传输结束。这种方式传送速度比通过CPU快，尤其是在批量传送时效率很高。
+通道控制方式：
+基本方法同上述的DMA控制方式，只是DMA通过DMA控制器完成，通道控制方式有专门通讯传输的通道总线完成。效率比DMA更高。
+DMA DMA（Direct Memory Access）控制器是一种在系统内部转移数据的独特外设，可以将其视为一种能够通过一组专用总线将内部和外部存储器与每个具有DMA能力的外设连接起来的控制器。它之所以属于外设，是因为它是在处理器的编程控制下来 执行传输的。
+DMA既可以指内存和外设直接存取数据这种内存访问的计算机技术，又可以指实现该技术的硬件模块（对于通用计算机PC而言，DMA控制逻辑由CPU和DMA控制接口逻辑芯片共同组成，嵌入式系统的DMA控制器内建在处理器芯片内部，一般称为DMA控制器，DMAC）。
+几种io模型 在网络环境下，通俗的讲，将IO分为两步：
+1.等(数据准备时间)
+2.数据搬迁
+如果要想提高IO效率，需要将等的时间降低。五种IO模型包括：阻塞IO、非阻塞IO、信号驱动IO、IO多路复用、异步IO。其中，前四个被称为同步IO。 在介绍五种IO模型时，我会举生活中钓鱼的例子，加深理解。</description>
+    </item>
+    
+    <item>
+      <title>java-oop 面向对象</title>
+      <link>http://localhost:1313/blog/post/java/java-oop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/java-oop/</guid>
+      <description>java oop(oriented-object-programing)面向对象编程
+三大特性
+ 封装 继承 多态  什么是面向对象?
+面向对象说到底就是一种思想，任何事物都可以看作是一个对象.用一句话解释,万物皆对象. 1、封装
+隐藏对象的属性和实现细节，仅对外提供公共访问方式，将变化隔离，便于使用，提高复用性和安全性。
+2、继承
+提高代码复用性；继承是多态的前提。
+3、多态
+父类或接口定义的引用变量可以指向子类或具体实现类的实例对象。提高了程序的拓展性。</description>
+    </item>
+    
+    <item>
+      <title>Java带资源的try语句（try-with-resource）</title>
+      <link>http://localhost:1313/blog/post/java/try%E8%AF%AD%E5%8F%A5try-with-resource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/try%E8%AF%AD%E5%8F%A5try-with-resource/</guid>
+      <description>带资源的try语句（try-with-resource）的最简形式为：
+try(Resource res = xxx)//可指定多个资源 {  work with res } try块退出时，会自动调用res.close()方法，关闭资源。
+PS:在coreJava第9版的第一卷的486页有解释。
+补充一下,在没有这个语法之前,流操作一般是这样写的:
+ InputStream is = null; OutputStream os = null; try { 	//... } catch (IOException e) { 	//... }finally{ 	try { 	if(os!=null){ 	os.close(); 	} 	if(is!=null){ 	is.close(); 	} 	} catch (IOException e2) { 	//... 	} }	而现在你可以这样写:
+ try( 	InputStream is = new FileInputStream(&amp;#34;...&amp;#34;); 	OutputStream os = new FileOutputStream(&amp;#34;.</description>
+    </item>
+    
+    <item>
+      <title>SATA硬盘工作模式</title>
+      <link>http://localhost:1313/blog/post/computer/sata%E7%A1%AC%E7%9B%98%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/computer/sata%E7%A1%AC%E7%9B%98%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/</guid>
+      <description>一、SATA硬盘有两种工作模式，都可以使用。IDE传输模式兼容性好些，AHCI传输速度快些。但并不是说AHCI模式下，硬盘的性能会有多大提高。硬盘的性能主要还是在读写速度上，传输不是硬盘的瓶胫。 IDE 模式
+IDE的英文全称为“Integrated Drive Electronics”，即“电子集成驱动器”，它的本意是指把“硬盘控制器”与“盘体”集成在一起的硬盘驱动器。把盘体与控制器集成在一起的做法减少了硬盘接口的电缆数目与长度，数据传输的可靠性得到了增强，硬盘制造起来变得更容易，因此硬盘生产厂商不需要再担心自己的硬盘是否与其它厂商生产的控制器兼容。 AHCI模式 AHCI（Serial ATA Advanced Host Controller Interface）串行ATA高级主控接口/高级主机控制器接口），是在Intel的指导下，由多家公司联合研发的接口标准，它允许存储驱动程序启用高级串行 ATA 功能。
+二、使用AHCI模式应注意的问题 如果在安装操作系统是就使用AHCI模式，需要加载AHCI驱动程序。WINDOWS在安装引导时，按F6可以加载驱动。如果不加载驱，安装完后启动操作系统会蓝屏。
+如果一个操作系统是在SATA的IDE模式下工，想切换为AHCI模式，先在操作系统中把驱动程序安装好后，再在BIOS中切换SATA工作模式为AHCI。 早期的操作系统，如WIN XP Win2003等操作系统，安装时最好把SATA模式调在IDE模式。安装完操作系统后，加上AHCI驱动程序，再重启计算机，在BIOS中将SATA模式切换到AHCI模式。
+三种模式的区别如下：
+1、定义不同。
+IDE模式：IDE是表示硬盘的传输接口，也叫ATA（Advanced Technology Attachmen）接口，现在PC机使用的硬盘大多数都是IDE兼容的。
+RAID模式：PADI模式即磁盘阵列模式，简单说就是利用多个硬盘同时工作，来保证数据的安全以及存取速度的。它共有九个模式，以数字命名，为RAID 0、RAID1到RAID 7以及RAID 0+1。 AHCI模式：AHCI本质是一种PCI类设备，在系统内存总线和串行ATA设备内部逻辑之间扮演一种通用接口的角色（即它在不同的操作系统和硬件中是通用的）。
+2、传输速度不同。
+IDE就是ATA模式，是并口传输模式，理论最大133Mb每秒。
+RADIO可以两倍于单块机械硬盘传输性能。
+AHCI就是SATA模式，串口传输模式，传输速度快，理论最大300Mb每秒。
+3、对NCQ的支持不同（NCQ是一种新的硬盘技术，简单来说开启它之后从一个程序跳到另一个程序时速度会更快）。
+IDE模式是将SATA硬盘映射成IDE模式，用SATA硬盘装系统的时候就不需要装SATA硬盘驱动。
+AHCI模式则与SATA模式相反，装系统时需要安装SATA驱动，而且只有这个模式才能打开NCQ功能。</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot AOP</title>
+      <link>http://localhost:1313/blog/post/springboot/springboot-aop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/springboot/springboot-aop/</guid>
+      <description>AOP：面向切面编程，相对于OOP面向对象编程 Spring的AOP的存在目的是为了解耦。AOP可以让一组类共享相同的行为。在OOP中只能继承和实现接口，且类继承只能单继承，阻碍更多行为添加到一组类上，AOP弥补了OOP的不足。
+还有就是为了清晰的逻辑，让业务逻辑关注业务本身，不用去关心其它的事情，比如事务。
+Spring的AOP是通过JDK的动态代理和CGLIB实现的。
+注意：在完成了引入AOP依赖包后，不需要去做其他配置。AOP的默认配置属性中，spring.aop.auto属性默认是开启的，也就是说只要引入了AOP依赖后，默认已经增加了@EnableAspectJAutoProxy，不需要在程序主类中增加@EnableAspectJAutoProxy来启用。 pom.xml
+ &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;2.2.2.RELEASE&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-aop&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;2.2.0.RELEASE&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;1.2.58&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt; controller
+package com.example.springaopdemo.controller;  import org.springframework.web.bind.annotation.PathVariable; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RestController;  @RestController public class AopController {   @RequestMapping(&amp;#34;/getInfo/{name}&amp;#34;)  public String getInfo(@PathVariable(&amp;#34;name&amp;#34;) String name){  return &amp;#34;name: &amp;#34; + name;  }   @RequestMapping(&amp;#34;/exception&amp;#34;)  public void exception(){  throw new RuntimeException(&amp;#34;this is a text exception&amp;#34;);  }  } aspect</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot Jpa</title>
+      <link>http://localhost:1313/blog/post/springboot/springboot-jpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/springboot/springboot-jpa/</guid>
+      <description>SpringBoot中使用SpringDataJPA
+JPA是什么? JPA(Java Persistence API)是Sun官方提出的Java持久化规范. 为Java开发人员提供了一种对象/关联映射工具来管理Java应用中的关系数据. 它的出现是为了简化现有的持久化开发工作和整合ORM技术. 结束各个ORM框架各自为营的局面.
+JPA仅仅是一套规范,不是一套产品, 也就是说Hibernate, TopLink等是实现了JPA规范的一套产品.
+Spring Data JPA Spring Data JPA是Spring基于ORM框架、JPA规范的基础上封装的一套JPA应用框架,是基于Hibernate之上构建的JPA使用解决方案,用极简的代码实现了对数据库的访问和操作,包括了增、删、改、查等在内的常用功能.
+实践 引入pom
+&amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-data-jpa&amp;lt;/artifactId&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt;  &amp;lt;scope&amp;gt;runtime&amp;lt;/scope&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt;  &amp;lt;optional&amp;gt;true&amp;lt;/optional&amp;gt;  &amp;lt;/dependency&amp;gt; entity
+package com.smile.springbootjpa.entity;  import lombok.Data;  import javax.persistence.Column; import javax.persistence.Entity; import javax.persistence.GeneratedValue; import javax.persistence.Id;  @Entity @Data public class User {   @Id  @GeneratedValue  private Long id;   @Column(nullable = false, unique = true)  private String userName;   @Column(nullable = false)  private String passWord;   @Column(nullable = false, unique = true)  private String email;   @Column(nullable = true, unique = true)  private String nickName;   @Column(nullable = false)  private String regTime;   public User(String userName, String passWord, String email, String nickName, String regTime) {  this.</description>
+    </item>
+    
+  </channel>
+</rss>

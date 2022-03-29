@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on ExampleSite</title>
+    <link>http://localhost:1313/blog/categories/java/</link>
+    <description>Recent content in java on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="http://localhost:1313/blog/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java带资源的try语句（try-with-resource）</title>
+      <link>http://localhost:1313/blog/post/java/try%E8%AF%AD%E5%8F%A5try-with-resource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/java/try%E8%AF%AD%E5%8F%A5try-with-resource/</guid>
+      <description>带资源的try语句（try-with-resource）的最简形式为：
+try(Resource res = xxx)//可指定多个资源 {  work with res } try块退出时，会自动调用res.close()方法，关闭资源。
+PS:在coreJava第9版的第一卷的486页有解释。
+补充一下,在没有这个语法之前,流操作一般是这样写的:
+ InputStream is = null; OutputStream os = null; try { 	//... } catch (IOException e) { 	//... }finally{ 	try { 	if(os!=null){ 	os.close(); 	} 	if(is!=null){ 	is.close(); 	} 	} catch (IOException e2) { 	//... 	} }	而现在你可以这样写:
+ try( 	InputStream is = new FileInputStream(&amp;#34;...&amp;#34;); 	OutputStream os = new FileOutputStream(&amp;#34;.</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot AOP</title>
+      <link>http://localhost:1313/blog/post/springboot/springboot-aop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/springboot/springboot-aop/</guid>
+      <description>AOP：面向切面编程，相对于OOP面向对象编程 Spring的AOP的存在目的是为了解耦。AOP可以让一组类共享相同的行为。在OOP中只能继承和实现接口，且类继承只能单继承，阻碍更多行为添加到一组类上，AOP弥补了OOP的不足。
+还有就是为了清晰的逻辑，让业务逻辑关注业务本身，不用去关心其它的事情，比如事务。
+Spring的AOP是通过JDK的动态代理和CGLIB实现的。
+注意：在完成了引入AOP依赖包后，不需要去做其他配置。AOP的默认配置属性中，spring.aop.auto属性默认是开启的，也就是说只要引入了AOP依赖后，默认已经增加了@EnableAspectJAutoProxy，不需要在程序主类中增加@EnableAspectJAutoProxy来启用。 pom.xml
+ &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;2.2.2.RELEASE&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-aop&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;2.2.0.RELEASE&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;1.2.58&amp;lt;/version&amp;gt;  &amp;lt;/dependency&amp;gt; controller
+package com.example.springaopdemo.controller;  import org.springframework.web.bind.annotation.PathVariable; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RestController;  @RestController public class AopController {   @RequestMapping(&amp;#34;/getInfo/{name}&amp;#34;)  public String getInfo(@PathVariable(&amp;#34;name&amp;#34;) String name){  return &amp;#34;name: &amp;#34; + name;  }   @RequestMapping(&amp;#34;/exception&amp;#34;)  public void exception(){  throw new RuntimeException(&amp;#34;this is a text exception&amp;#34;);  }  } aspect</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot Jpa</title>
+      <link>http://localhost:1313/blog/post/springboot/springboot-jpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/post/springboot/springboot-jpa/</guid>
+      <description>SpringBoot中使用SpringDataJPA
+JPA是什么? JPA(Java Persistence API)是Sun官方提出的Java持久化规范. 为Java开发人员提供了一种对象/关联映射工具来管理Java应用中的关系数据. 它的出现是为了简化现有的持久化开发工作和整合ORM技术. 结束各个ORM框架各自为营的局面.
+JPA仅仅是一套规范,不是一套产品, 也就是说Hibernate, TopLink等是实现了JPA规范的一套产品.
+Spring Data JPA Spring Data JPA是Spring基于ORM框架、JPA规范的基础上封装的一套JPA应用框架,是基于Hibernate之上构建的JPA使用解决方案,用极简的代码实现了对数据库的访问和操作,包括了增、删、改、查等在内的常用功能.
+实践 引入pom
+&amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-boot-starter-data-jpa&amp;lt;/artifactId&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt;  &amp;lt;scope&amp;gt;runtime&amp;lt;/scope&amp;gt;  &amp;lt;/dependency&amp;gt;  &amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt;  &amp;lt;optional&amp;gt;true&amp;lt;/optional&amp;gt;  &amp;lt;/dependency&amp;gt; entity
+package com.smile.springbootjpa.entity;  import lombok.Data;  import javax.persistence.Column; import javax.persistence.Entity; import javax.persistence.GeneratedValue; import javax.persistence.Id;  @Entity @Data public class User {   @Id  @GeneratedValue  private Long id;   @Column(nullable = false, unique = true)  private String userName;   @Column(nullable = false)  private String passWord;   @Column(nullable = false, unique = true)  private String email;   @Column(nullable = true, unique = true)  private String nickName;   @Column(nullable = false)  private String regTime;   public User(String userName, String passWord, String email, String nickName, String regTime) {  this.</description>
+    </item>
+    
+  </channel>
+</rss>

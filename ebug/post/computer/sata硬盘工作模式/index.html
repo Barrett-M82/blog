@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html><body>#导航栏
+<nav class="nav">
+<ul>
+    
+    
+    <li><a href="/blog/">首页</a></li>
+     
+    
+    <li><a href="/blog/post">博文</a></li>
+     
+</ul>
+</nav><div id="content">
+
+<div id="post" class="post">
+    <article>
+        <header>
+            <h1 class="post-title">SATA硬盘工作模式</h1>
+        </header>
+        <p>一、SATA硬盘有两种工作模式，都可以使用。IDE传输模式兼容性好些，AHCI传输速度快些。但并不是说AHCI模式下，硬盘的性能会有多大提高。硬盘的性能主要还是在读写速度上，传输不是硬盘的瓶胫。
+IDE 模式</p>
+<p>IDE的英文全称为“Integrated Drive Electronics”，即“电子集成驱动器”，它的本意是指把“硬盘控制器”与“盘体”集成在一起的硬盘驱动器。把盘体与控制器集成在一起的做法减少了硬盘接口的电缆数目与长度，数据传输的可靠性得到了增强，硬盘制造起来变得更容易，因此硬盘生产厂商不需要再担心自己的硬盘是否与其它厂商生产的控制器兼容。
+AHCI模式
+AHCI（Serial ATA Advanced Host Controller Interface）串行ATA高级主控接口/高级主机控制器接口），是在Intel的指导下，由多家公司联合研发的接口标准，它允许存储驱动程序启用高级串行 ATA 功能。</p>
+<p>二、使用AHCI模式应注意的问题
+如果在安装操作系统是就使用AHCI模式，需要加载AHCI驱动程序。WINDOWS在安装引导时，按F6可以加载驱动。如果不加载驱，安装完后启动操作系统会蓝屏。</p>
+<p>如果一个操作系统是在SATA的IDE模式下工，想切换为AHCI模式，先在操作系统中把驱动程序安装好后，再在BIOS中切换SATA工作模式为AHCI。
+早期的操作系统，如WIN XP Win2003等操作系统，安装时最好把SATA模式调在IDE模式。安装完操作系统后，加上AHCI驱动程序，再重启计算机，在BIOS中将SATA模式切换到AHCI模式。</p>
+<p>三种模式的区别如下：</p>
+<p>1、定义不同。</p>
+<p>IDE模式：IDE是表示硬盘的传输接口，也叫ATA（Advanced Technology Attachmen）接口，现在PC机使用的硬盘大多数都是IDE兼容的。</p>
+<p>RAID模式：PADI模式即磁盘阵列模式，简单说就是利用多个硬盘同时工作，来保证数据的安全以及存取速度的。它共有九个模式，以数字命名，为RAID 0、RAID1到RAID 7以及RAID 0+1。
+AHCI模式：AHCI本质是一种PCI类设备，在系统内存总线和串行ATA设备内部逻辑之间扮演一种通用接口的角色（即它在不同的操作系统和硬件中是通用的）。</p>
+<p>2、传输速度不同。</p>
+<p>IDE就是ATA模式，是并口传输模式，理论最大133Mb每秒。</p>
+<p>RADIO可以两倍于单块机械硬盘传输性能。</p>
+<p>AHCI就是SATA模式，串口传输模式，传输速度快，理论最大300Mb每秒。</p>
+<p>3、对NCQ的支持不同（NCQ是一种新的硬盘技术，简单来说开启它之后从一个程序跳到另一个程序时速度会更快）。</p>
+<p>IDE模式是将SATA硬盘映射成IDE模式，用SATA硬盘装系统的时候就不需要装SATA硬盘驱动。</p>
+<p>AHCI模式则与SATA模式相反，装系统时需要安装SATA驱动，而且只有这个模式才能打开NCQ功能。</p>
+
+        <br />
+
+        <div>
+            
+            <a href="http://localhost:1313/blog/post/springboot/springboot-aop/">前一页</a>
+            
+            
+            <a href="http://localhost:1313/blog/post/ai/%E5%9B%BE%E7%89%87%E8%BD%AC%E6%96%87%E5%AD%97/">后一页</a>
+            
+        </div>
+    </article>
+</div>
+
+
+        </div><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script></body>
+</html>

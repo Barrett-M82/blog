@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html><body>
+<nav class="nav">
+<ul>
+    
+    
+    <li><a href="/blog/">首页</a></li>
+     
+    
+    <li><a href="/blog/post">博文</a></li>
+     
+</ul>
+</nav><div id="content">
+
+<div id="post" class="post">
+    <article>
+        <header>
+            <h1 class="post-title">java 读写文件</h1>
+        </header>
+        <p><strong>概述</strong></p>
+<blockquote>
+<p>nio的使用场景非常多netty,tomcat,jetty,redis等.</p>
+</blockquote>
+<p><strong>什么是io</strong></p>
+<p>百度百科:</p>
+<p>I/O输入/输出(Input/Output)，分为IO设备和IO接口两个部分。</p>
+<p>在POSIX兼容的系统上，例如Linux系统，I/O操作可以有多种方式，比如DIO(Direct I/O)，AIO(Asynchronous，I/O 异步I/O)，Memory-Mapped I/O(内存映设I/O)等，不同的I/O方式有不同的实现方式和性能，在不同的应用中可以按情况选择不同的I/O方式。</p>
+<h4 id="cpu与io设备间数据传输主要有四种方式">CPU与IO设备间数据传输主要有四种方式：</h4>
+<p><strong>查询控制方式：</strong></p>
+<p>CPU通过程序主动读取状态寄存器以了解接口情况，并完成相应的数据操作。查询操作需要在时钟周期较少的间隔内重复进行，因而CPU效率低。</p>
+<p><strong>中断控制方式：</strong></p>
+<p>当程序常规运行中，若外部有优先级更高的事件出现，则通过中断请求通知CPU，CPU再读取状态寄存器确定事件的种类，以便执行不同的分支处理。这种方式CPU效率高且实时性好。</p>
+<p><strong>DMA（Direct Memory Access）控制方式：</strong></p>
+<p>顾名思义，直接内存存取即数据传送的具体过程直接由硬件（DMA控制器）在内存和IO之间完成，CPU只在开始时将控制权暂时交予DMA，直到数据传输结束。这种方式传送速度比通过CPU快，尤其是在批量传送时效率很高。</p>
+<p><strong>通道控制方式：</strong></p>
+<p>基本方法同上述的DMA控制方式，只是DMA通过DMA控制器完成，通道控制方式有专门通讯传输的通道总线完成。效率比DMA更高。</p>
+<h4 id="dma">DMA</h4>
+<p>DMA（Direct Memory Access）控制器是一种在系统内部转移数据的独特外设，可以将其视为一种能够通过一组专用总线将内部和外部存储器与每个具有DMA能力的外设连接起来的控制器。它之所以属于外设，是因为它是在处理器的编程控制下来 执行传输的。</p>
+<p>DMA既可以指内存和外设直接存取数据这种内存访问的计算机技术，又可以指实现该技术的硬件模块（对于通用计算机PC而言，DMA控制逻辑由CPU和DMA控制接口逻辑芯片共同组成，嵌入式系统的DMA控制器内建在处理器芯片内部，一般称为DMA控制器，DMAC）。</p>
+<h4 id="几种io模型"><strong>几种io模型</strong></h4>
+<p>在网络环境下，通俗的讲，将IO分为两步：</p>
+<p>1.等(数据准备时间)</p>
+<p>2.数据搬迁</p>
+<p>如果要想提高IO效率，需要将等的时间降低。五种IO模型包括：阻塞IO、非阻塞IO、信号驱动IO、IO多路复用、异步IO。其中，前四个被称为同步IO。
+在介绍五种IO模型时，我会举生活中钓鱼的例子，加深理解。</p>
+
+        <br />
+
+        <div>
+            
+            <a href="http://localhost:1313/blog/post/java/java-oop/">前一页</a>
+            
+            
+            <a href="http://localhost:1313/blog/post/java/java-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/">后一页</a>
+            
+        </div>
+    </article>
+</div>
+
+
+        </div><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script></body>
+</html>

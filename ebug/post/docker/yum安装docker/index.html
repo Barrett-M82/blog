@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html><body>#导航栏
+<nav class="nav">
+<ul>
+    
+    
+    <li><a href="/blog/">首页</a></li>
+     
+    
+    <li><a href="/blog/post">博文</a></li>
+     
+</ul>
+</nav><div id="content">
+
+<div id="post" class="post">
+    <article>
+        <header>
+            <h1 class="post-title">yum 安装docker</h1>
+        </header>
+        <h2 id="centos-7使用yum安装docker">CentOS 7使用yum安装Docker</h2>
+<h3 id="1由于之前没有安装过直接安装">1.由于之前没有安装过，直接安装</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /etc/yum.repos.d/
+</span></span><span style="display:flex;"><span>sudo wget http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</span></span><span style="display:flex;"><span>sudo yum install -y docker-ce
+</span></span></code></pre></div><h3 id="2设置启动项">2.设置启动项</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>systemctl enable docker.service
+</span></span></code></pre></div><h3 id="3卸载旧版本">3.卸载旧版本</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yum remove docker <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-client <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-client-latest <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-common <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-latest <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-latest-logrotate <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-logrotate <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-engine
+</span></span></code></pre></div>
+        <br />
+
+        <div>
+            
+            <a href="http://localhost:1313/blog/post/java/%E4%BA%94%E5%A4%A7io%E6%A8%A1%E5%9E%8B/">前一页</a>
+            
+            
+            <a href="http://localhost:1313/blog/post/windows/windows%E6%B8%85%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/">后一页</a>
+            
+        </div>
+    </article>
+</div>
+
+
+        </div><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script></body>
+</html>
